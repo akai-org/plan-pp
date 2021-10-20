@@ -1,7 +1,7 @@
 FROM node:14.18.1-alpine
 WORKDIR /app/frontend
-COPY package.json /app/frontend
-COPY package-lock.json /app/frontend
-RUN npm install
-RUN npm install react-scripts@4.0.3 -g 
+ENV PATH="./node_modes/.bin:$PATH"
+COPY . .
+RUN npm run build
 EXPOSE 3000
+CMD ["npm", "start"]
