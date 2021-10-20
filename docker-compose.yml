@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: mysql-planpp
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+       MYSQL_DATABASE: planpp
+       MYSQL_ROOT_USER: root
+       MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - .dbdata:/var/lib/mysql
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend-planpp
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/app/backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    command : npm start
+    container_name: frontend-planpp
+    depends_on:
+      - backend
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app/frontend
+      - ./frontend/node_modules:/app/frontend/node_modules
+    restart: always
+    stdin_open: true
