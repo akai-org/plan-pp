@@ -29,7 +29,6 @@ services:
     build:
       context: ./frontend/
       dockerfile: Dockerfile
-    command : npm start
     container_name: frontend-planpp
     depends_on:
       - backend
