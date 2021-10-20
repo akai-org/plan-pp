@@ -20,7 +20,7 @@ services:
     container_name: backend-planpp
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./backend:/app/backend
+      - ./backend/:/app/backend/
     ports:
       - "8000:8000"
     depends_on:
@@ -36,7 +36,9 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./frontend:/app/frontend
-      - ./frontend/node_modules:/app/frontend/node_modules
+      - ./frontend/:/app/frontend/
+      - node_modules:/app/frontend/node_modules
     restart: always
     stdin_open: true
+volumes:
+  node_modules:
