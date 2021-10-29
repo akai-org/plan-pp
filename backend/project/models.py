@@ -3,7 +3,7 @@ from django.db import models
 
 # Model for database table of plans
 class CoursePlan(models.Model):
-    courseID = models.AutoField()
+    courseID = models.AutoField(primary_key=True)
     faculty = models.CharField(max_length=100)
     # stationary studies: True, extramural: False
     MODE = [(True, 'STACJONARNE'), (False, 'ZAOCZNE')]
@@ -19,20 +19,22 @@ class CoursePlan(models.Model):
 
 # table of users
 class User(models.Model):
-    userID = models.AutoField()
+    userID = models.AutoField(primary_key=True)
     login = models.CharField(max_length=30)
     password = models.CharField(max_length=256)  # length due to encryption
-    group = models.ForeignKey('StudentGroup', on_delete=models.SET_NULL)
-    coursePlan = models.ForeignKey('CoursePlan', on_delete=models.SET_NULL)
+    group = models.ForeignKey('StudentGroup', on_delete=models.SET_NULL, null=True)
+    coursePlan = models.ForeignKey('CoursePlan', on_delete=models.SET_NULL, null=True)
+
 
 # table for all student groups across the university, id for identyfication in database, name for students
 class StudentGroup(models.Model):
-    groupID = models.AutoField()
+    groupID = models.AutoField(primary_key=True)
     groupName = models.CharField(max_length=10)
+
 
 # table of teachers
 class Teacher(models.Model):
-    teacherID = models.AutoField()
+    teacherID = models.AutoField(primary_key=True)
     firstName = models.CharField(max_length=40)
     lastName = models.CharField(max_length=80)
     title = models.CharField(max_length=80, blank=True, null=True)
@@ -47,7 +49,7 @@ class LessonTeacher(models.Model):
 # table of time slots: it includes course plan classes and individual modifications for all courses and users
 # probably the biggest table in database
 class Slot(models.Model):
-    slotID = models.AutoField()
+    slotID = models.AutoField(primary_key=True)
     dayOfWeek = models.PositiveSmallIntegerField()
     startHour = models.TimeField()
     endHour = models.TimeField()
@@ -76,11 +78,11 @@ class OtherActivity(models.Model):
 
 # table of all subjects in all courses plans
 class Subject(models.Model):
-    subjectID = models.AutoField()
+    subjectID = models.AutoField(primary_key=True)
     # full name of subject
-    name = models.CharField(40)
+    name = models.CharField(max_length=40)
     # abbreviated name of subject
-    abbr = models.CharField(10)
+    abbr = models.CharField(max_length=10)
 
 
 # table that keeps connection between student group and their lessons
