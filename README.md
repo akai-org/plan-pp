@@ -1,13 +1,13 @@
-# Plan zajec install
+# Plan zajec
 
-# Frontend
-Node 14.18.1 \n
-ReactJS >=17.0.2
+## Frontend
+- Node 14.18.1 \n
+- ReactJS >=17.0.2
 
-# Backend
-Python 3.9 \n
-Django >= 3.0 , < 4.0 \n
-Django rest framework ...
+## Backend
+- Python 3.9
+- Django >= 3.0 , < 4.0 \n
+- Django rest framework ...
 
 ## Clone repository
 ## Docker
