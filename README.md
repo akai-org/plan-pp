@@ -14,7 +14,8 @@ To run our app type:
 docker-compose up
 ```
 
-
+DB user: admin
+DB user pass: ppadmin21
 
 
 prowadzi @mima-design
