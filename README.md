@@ -1,12 +1,12 @@
 # Plan zajec install
 
 # Frontend
-Node 14.18.1
+Node 14.18.1 \n
 ReactJS >=17.0.2
 
 # Backend
-Python 3.9
-Django >= 3.0 , < 4.0
+Python 3.9 \n
+Django >= 3.0 , < 4.0 \n
 Django rest framework ...
 
 ## Clone repository
