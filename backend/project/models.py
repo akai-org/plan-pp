@@ -8,7 +8,6 @@ class CoursePlan(models.Model):
     # stationary studies: True, extramural: False
     MODE = [(True, 'STACJONARNE'), (False, 'ZAOCZNE')]
     studiesMode = models.BooleanField(choices=MODE)
-
     course = models.CharField(max_length=100)
     term = models.PositiveSmallIntegerField()
     startAt = models.DateField()
@@ -36,7 +35,7 @@ class Teacher(models.Model):
     teacherID = models.AutoField()
     firstName = models.CharField(max_length=40)
     lastName = models.CharField(max_length=80)
-    title = models.CharField(max_length=80)
+    title = models.CharField(max_length=80, blank=True, null=True)
 
 
 # table connects teachers with their lessons
@@ -54,9 +53,9 @@ class Slot(models.Model):
     endHour = models.TimeField()
     description = models.TextField(blank=True, null=True)
     # Field says after what date slot shouldn't be displayed in schedule
-    endAt = models.DateField(blank=True, null=True)
+    endAtDate = models.DateField(blank=True, null=True)
     # Field says after what date slot should be displayed in schedule
-    startAt = models.DateField(blank=True, null=True)
+    startAtDate = models.DateField(blank=True, null=True)
 
 
 # all lessons for all course plans
