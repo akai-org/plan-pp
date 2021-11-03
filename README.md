@@ -22,3 +22,14 @@ To run our app type:
 ```console
 docker-compose up
 ```
+
+DB user: admin
+DB user pass: ppadmin21
+
+
+prowadzi @mima-design
+
+@monsiw
+@hoaqm
+@siemieniuk
+@wojtop
