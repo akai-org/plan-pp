@@ -14,6 +14,13 @@ To run our app type:
 docker-compose up
 ```
 
+Sometimes you will need to make migrations in Django server.
+In order to do that, your Docker container must be enabled. After that type:
+```console
+docker exec -it backend-planpp python manage.py makemigrations
+docker exec -it backend-planpp python manage.py migrate
+```
+
 DB user: admin
 DB user pass: ppadmin21
 
