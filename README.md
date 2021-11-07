@@ -29,9 +29,17 @@ In order to do that, your Docker container must be enabled. After that type:
 docker exec -it backend-planpp python manage.py makemigrations
 docker exec -it backend-planpp python manage.py migrate
 ```
+### BACKEND
 
-DB user: admin
-DB user pass: ppadmin21
+To execute Django commands inside your container use comand:
+```console
+docker exec -it backend-planpp python manage.py <command>
+```
+For example: to create Django super user type:
+```console
+docker exec -it backend-planpp python manage.py createsuperuser
+```
+
 
 
 prowadzi @mima-design
