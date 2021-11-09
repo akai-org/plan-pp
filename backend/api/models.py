@@ -17,12 +17,19 @@ class CoursePlan(models.Model):
     WEEKTYPE = [(True, 'EVEN'), (False, 'ODD')]
     firstWeekType = models.BooleanField(choices=WEEKTYPE)
 
+    def __str__(self):
+        return '{}, {}, {}, {}'.format(self.faculty, self.course, self.studiesMode, self.term)
+
 
 # table of course plans users
 class PlanUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='db_user')
     group = models.ForeignKey('StudentGroup', on_delete=models.SET_NULL, null=True)
     coursePlan = models.ForeignKey('CoursePlan', on_delete=models.SET_NULL, null=True)
+
+    # now I don't know how to connect these objects
+    # def __str__(self):
+    #      return '{} {}'.format(User.objects.select_related())
 
 
 # table for all student groups across the university, id for identyfication in database, name for students
@@ -95,4 +102,4 @@ class Modification(models.Model):
     TYPES = [(-1, 'REMOVE'), (1, 'ADD')]
     type = models.SmallIntegerField()
     slot = models.ForeignKey('Slot', on_delete=models.CASCADE)
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    user = models.ForeignKey('PlanUser', on_delete=models.CASCADE)
