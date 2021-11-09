@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Model for database table of plans
@@ -17,11 +18,9 @@ class CoursePlan(models.Model):
     firstWeekType = models.BooleanField(choices=WEEKTYPE)
 
 
-# table of users
-class User(models.Model):
-    userID = models.AutoField(primary_key=True)
-    login = models.CharField(max_length=30)
-    password = models.CharField(max_length=256)  # length due to encryption
+# table of course plans users
+class PlanUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='db_user')
     group = models.ForeignKey('StudentGroup', on_delete=models.SET_NULL, null=True)
     coursePlan = models.ForeignKey('CoursePlan', on_delete=models.SET_NULL, null=True)
 
