@@ -1,0 +1,4 @@
+INSERT INTO planpp.api_courseplan (courseID, faculty, studiesMode, course, term, startAt, endAt, firstWeekType) VALUES (1, 'WIiT', 1, 'Informatyka', 3, '2000-07-04', '2000-07-08', 1);
+INSERT INTO planpp.api_courseplan (courseID, faculty, studiesMode, course, term, startAt, endAt, firstWeekType) VALUES (4, 'TEST', 1, 'Informatyka', 3, '2000-07-04', '2000-07-08', 1);
+INSERT INTO planpp.api_courseplan (courseID, faculty, studiesMode, course, term, startAt, endAt, firstWeekType) VALUES (5, 'WIiT', 1, 'Informatyka', 5, '2021-11-16', '2021-11-28', 1);
+INSERT INTO planpp.api_courseplan (courseID, faculty, studiesMode, course, term, startAt, endAt, firstWeekType) VALUES (6, 'WARiE', 1, 'Automatyka i Robotyka', 5, '2021-11-18', '2021-11-28', 1);
