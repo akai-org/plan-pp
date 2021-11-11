@@ -1,22 +1,23 @@
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
+from api.models import PlanUser
 from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ('userID', 'login')
+        model = PlanUser
+        fields = ('id', 'username')
 
 class RegisterSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(read_only=True, source="user.username")
+    password = serializers.CharField(read_only=True, source="user.password")
     class Meta:
-        model = User
-        fields = ('userID', 'login', 'password')
-
-
+        model = PlanUser
+        fields = ('id', 'username', 'password')
+    
     def create(self, validated_data):
-        user = User.objects.create_user(
-            validated_data['login'],
+        user = PlanUser.objects.create_user(
+            validated_data['username'],
             validated_data['password']
         )
         return user
