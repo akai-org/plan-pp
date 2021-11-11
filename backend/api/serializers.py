@@ -8,23 +8,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = PlanUser
         fields = ('id', 'username')
 
-class RegisterSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(read_only=True, source="user.username")
-    password = serializers.CharField(read_only=True, source="user.password")
-    class Meta:
-        model = PlanUser
-        fields = ('id', 'username', 'password')
-    
-    def create(self, validated_data):
-        user = PlanUser.objects.create_user(
-            validated_data['username'],
-            validated_data['password']
-        )
-        return user
-
-
 class LoginSerializer(serializers.Serializer):
-    login = serializers.CharField()
+    username = serializers.CharField()
     password = serializers.CharField()
 
     def validate(self, data):

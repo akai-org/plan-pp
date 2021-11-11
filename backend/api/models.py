@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Model for database table of plans
 class CoursePlan(models.Model):
     courseID = models.AutoField(primary_key=True)
@@ -17,11 +18,12 @@ class CoursePlan(models.Model):
     firstWeekType = models.BooleanField(choices=WEEKTYPE)
 
 
-# table of users
+# table of course plans users
 class PlanUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='db_user')
     group = models.ForeignKey('StudentGroup', on_delete=models.SET_NULL, null=True)
     coursePlan = models.ForeignKey('CoursePlan', on_delete=models.SET_NULL, null=True)
+
 
 # table for all student groups across the university, id for identyfication in database, name for students
 class StudentGroup(models.Model):
@@ -88,4 +90,9 @@ class LessonGroups(models.Model):
     group = models.ForeignKey('StudentGroup', on_delete=models.CASCADE)
 
 
-
+# table keeps modifications of all users
+class Modification(models.Model):
+    TYPES = [(-1, 'REMOVE'), (1, 'ADD')]
+    type = models.SmallIntegerField()
+    slot = models.ForeignKey('Slot', on_delete=models.CASCADE)
+    user = models.ForeignKey('PlanUser', on_delete=models.CASCADE)
