@@ -1,5 +1,8 @@
 from django.db import models
+from django.db.models import Q
 from django.contrib.auth.models import User
+
+WEEKTYPE = [(False, 'NIEPARZYSTY'),(True, 'PARZYSTY') ]
 
 
 # Model for database table of plans
@@ -14,7 +17,6 @@ class CoursePlan(models.Model):
     startAt = models.DateField()
     endAt = models.DateField()
     # even week: True, odd week: False
-    WEEKTYPE = [(True, 'EVEN'), (False, 'ODD')]
     firstWeekType = models.BooleanField(choices=WEEKTYPE)
 
     def __str__(self):
@@ -23,13 +25,13 @@ class CoursePlan(models.Model):
 
 # table of course plans users
 class PlanUser(models.Model):
+    username = User.username
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='db_user')
     group = models.ForeignKey('StudentGroup', on_delete=models.SET_NULL, null=True)
     coursePlan = models.ForeignKey('CoursePlan', on_delete=models.SET_NULL, null=True)
 
-    # now I don't know how to connect these objects
-    # def __str__(self):
-    #      return '{} {}'.format(User.objects.select_related())
+    def __str__(self):
+         return 'Username: {} groupID: {} coursePlanID: {}'.format(self.username, self.group_id, self.coursePlan)
 
 
 # table for all student groups across the university, id for identyfication in database, name for students
@@ -64,6 +66,8 @@ class Slot(models.Model):
     endAtDate = models.DateField(blank=True, null=True)
     # Field says after what date slot should be displayed in schedule
     startAtDate = models.DateField(blank=True, null=True)
+    # 0 - every, 1 - odd, 2 - even
+    weekType = models.SmallIntegerField()
 
 
 # all lessons for all course plans
