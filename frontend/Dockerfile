@@ -1,6 +1,9 @@
 FROM node:14.18.1-alpine
-WORKDIR /app/frontend
-COPY package.json /app/frontend/
-COPY package-lock.json /app/frontend/
+COPY package.json /data/
+COPY package-lock.json /data/
+WORKDIR /data/
 RUN npm install
+ENV PATH /data/node_modules/.bin:$PATH
+COPY . /data/app/frontend/
+WORKDIR /data/app/frontend/
 EXPOSE 3000
