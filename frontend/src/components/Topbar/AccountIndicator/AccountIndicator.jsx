@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-import { ReactComponent as iconDown } from "../../../resources/icons/icon_down.svg";
+import { MdKeyboardArrowDown as iconDown } from "react-icons/md";
 
 const Wrapper = styled.div`
   display: grid;
@@ -28,6 +27,7 @@ const IconDown = styled(iconDown)`
   grid-column: 2/3;
   grid-row: 1/3;
   justify-self: center;
+  transform: scale(1.75);
 `;
 
 const AccountIndicator = (props) => {
