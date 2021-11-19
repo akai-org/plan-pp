@@ -23,6 +23,7 @@ const Logo = styled.span`
 
 const Bar = styled.div`
   height: 80px;
+  min-width: 800px;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -4,10 +4,11 @@ import Topbar from "../../components/Topbar/Topbar";
 import CenterPanel from "./CenterPanel/CenterPanel";
 import styled from "styled-components";
 import LessonDetailCard from "../../components/LessonDetailCard/LessonDetailCard";
-import Card from "../../components/UI/Card";
+import RightPanel from "./RightPanel/RightPanel";
 
 const Container = styled.div`
   max-width: 1200px;
+  min-width: 1000px;
   margin: 50px auto 0;
   display: grid;
   grid-template-columns: 32% 36% 32%;
@@ -15,14 +16,7 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const CardMockup = styled(Card)`
-  transform: translateY(30px);
-  border-radius: 12px;
-  min-height: 500px;
-  min-width: 300px;
-`;
-
-const RightPanel = styled(LessonDetailCard)`
+const LeftPanel = styled(LessonDetailCard)`
   transform: translateY(30px);
 `;
 
@@ -31,9 +25,9 @@ const Home = (props) => {
     <>
       <Topbar></Topbar>
       <Container>
-        <RightPanel></RightPanel>
+        <LeftPanel></LeftPanel>
         <CenterPanel></CenterPanel>
-        <CardMockup></CardMockup>
+        <RightPanel></RightPanel>
       </Container>
     </>
   );

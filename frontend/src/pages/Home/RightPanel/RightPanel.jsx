@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "../../../components/UI/Card";
-import Button from "../../../components/UI/Button";
 import LessonTile from "../../../components/LessonTile/LessonTile";
 import styled from "styled-components";
 import PanelHeader from "../PanelHeader/PanelHeader";
@@ -14,26 +13,23 @@ const StyledCard = styled(Card)`
   border-radius: 12px;
   min-height: 500px;
   min-width: 300px;
-  box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.2);
-`;
-
-const StyledButton = styled(Button)`
-  align-self: center;
+  transform: translateY(30px);
 `;
 
 const MainCard = (props) => {
   return (
     <StyledCard className={props.className}>
       <PanelHeader
-        title="Dzisiaj"
-        primaryHeading="Poniedziałek - 25.10"
+        title="Jutro"
+        primaryHeading="Wtorek - 26.10"
         secondaryHeading="tydzien nieparzysty"
       />
       <LessonList>
-        <LessonTile />
-        <LessonTile />
+        <LessonTile alternative />
+        <LessonTile alternative />
       </LessonList>
-      <StyledButton>Zobacz pełny plan na tydzień</StyledButton>
+      {/* Pusty div potrzebny żeby layout sie nie popsuł */}
+      <div />
     </StyledCard>
   );
 };

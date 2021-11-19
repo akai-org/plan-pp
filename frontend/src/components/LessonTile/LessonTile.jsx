@@ -1,9 +1,11 @@
 import React from "react";
+import PropTypes, { string } from "prop-types";
 import styled from "styled-components";
 
 const Tile = styled.div`
   color: white;
-  background-color: #0085d0;
+  background-color: ${(props) =>
+    props.alternativeColor ? "#669AB8" : "#0085d0"};
   border-radius: 4px;
   margin: 4px;
   min-height: 70px;
@@ -49,13 +51,18 @@ const Classroom = styled.span`
 
 const LessonTile = (props) => {
   return (
-    <Tile>
+    <Tile className={props.className} alternativeColor={props.alternative}>
       <Name>Spotkanie Koła</Name>
       <StartTime>16:50</StartTime>
       <EndTime>18:20</EndTime>
       <Classroom>125BT</Classroom>
     </Tile>
   );
+};
+
+LessonTile.propTypes = {
+  className: string,
+  alternative: PropTypes.bool,
 };
 
 export default LessonTile;
