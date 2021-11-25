@@ -28,7 +28,7 @@
       <connection connection-id="5b188a29-3ec9-492d-9923-b5d21fcf792a">
         <schema name="mysql" object-types="table, view" />
         <schema name="performance_schema" object-types="table, view" />
-        <schema name="planpp" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
+        <schema name="planpp" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>

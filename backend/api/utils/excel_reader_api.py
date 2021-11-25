@@ -1,212 +1,143 @@
 class Teacher:
-    teacherID = ""
-    teacherFirstName = ""
-    teacherLastName = ""
+    teacher_id = ""
+    teacher_first_name = ""
+    teacher_last_name = ""
     title = ""
 
 
-teacherIDs = []
-teacherID = ""
-teacherIDs.append(teacherID)
+teacher_ids = [""]
 
-teacherFirstNames = []
-teacherFirstName = ""
-teacherFirstNames.append(teacherFirstName)
+teacher_first_names = [""]
 
-teacherLastNames = []
-teacherLastName = ""
-teacherLastNames.append(teacherLastName)
+teacher_last_names = [""]
 
-titles = []
-title = ""
-titles.append(title)
+titles = [""]
 
 
 class StudentGroup:
-    groupID = ""
-    groupName = ""
+    group_id = ""
+    group_name = ""
 
 
-groupNames = []
-groupName = ""
-groupNames.append(groupName)
+group_names = [""]
 
-groupIDs = []
-groupID = ""
-groupIDs.append(groupID)
+group_ids = [""]
 
-# endAt i startAt jest w CoursePlan
+# end_at i start_at jest w CoursePlan
 
-theClasses = []
-theClass = ""
-theClasses.append(theClass)
+the_classes = [""]
 
-Types = []
-Type = ""
-Types.append(Type)
+types = [""]
 
 
 class CoursePlan:
-    courseID = ""
+    course_id = ""
     faculty = ""
     course = ""
     term = ""
-    startAt = ""
-    endAt = ""
-    firstWeekType = ""
-    studiesMode = ""
+    start_at = ""
+    end_at = ""
+    first_week_type = ""
+    studies_mode = ""
 
 
-courseIDs = []
-courseID = ""
-courseIDs.append(courseID)
+course_ids = [""]
 
-faculties = []
-faculty = ""
-faculties.append(faculty)
+faculties = [""]
 
-courses = []
-course = ""
-courses.append(course)
+courses = [""]
 
-terms = []
-term = ""
-terms.append(term)
+terms = [""]
 
-startAts = []
-startAt = ""
-startAts.append(startAt)
+start_ats = [""]
 
-endAts = []
-endAt = ""
-endAts.append(endAt)
+end_ats = [""]
 
-firstWeekTypes = []
-firstWeekType = ""
-firstWeekTypes.append(firstWeekType)
+first_week_types = [""]
 
-studiesModes = []
-studiesMode = ""
-studiesModes.append(studiesMode)
+studies_modes = [""]
 
 
 class User:
-    userID = ""
+    user_id = ""
     login = ""
     password = ""
     group = ""
 
 
-userIDs = []
-userID = ""
-userIDs.append(userID)
+user_ids = [""]
 
-logins = []
-login = ""
-logins.append(login)
+logins = [""]
 
-passwords = []
-password = ""
-passwords.append(password)
+passwords = [""]
 
 
 class Subject:
-    subjectID = ""
+    subject_id = ""
     name = ""
     abbr = ""
 
 
-subjectIDs = []
-subjectID = ""
-subjectIDs.append(subjectID)
+subject_ids = [""]
 
-names = []
-name = ""
-names.append(name)
+names = [""]
 
-abbr_s = []
-abbr = ""
-abbr_s.append(abbr)
+abbr_s = [""]
 
 
 class Slot:
-    slotID = ""
-    dayOfWeek = ""
-    startHour = ""
-    endHour = ""
-    weekType = ""
+    slot_id = ""
+    day_of_week = ""
+    start_hour = ""
+    end_hour = ""
+    week_type = ""
     description = ""
-    endAt = ""
-    startAt = ""
+    end_at = ""
+    start_at = ""
 
 
-slotIDs = []
-slotID = ""
-slotIDs.append(slotID)
+slot_ids = [""]
 
-dayOfWeeks = []
-dayOfWeek = ""
-dayOfWeeks.append(dayOfWeek)
+day_of_weeks = [""]
 
-startHours = []
-startHour = ""
-startHours.append(startHour)
+start_hours = [""]
 
-endHours = []
-endHour = ""
-endHours.append(endHour)
+end_hours = [""]
 
-weekTypes = []
-weekType = ""
-weekTypes.append(weekType)
+week_types = [""]
 
-descriptions = []
-description = ""
-descriptions.append(description)
+descriptions = [""]
 
 
 class Lesson:
-    lessonID = ""
-    lessonType = ""
+    lesson_id = ""
+    lesson_type = ""
     classroom = ""
 
 
-lessonTypes = []
-lessonType = ""
-lessonTypes.append(lessonType)
+lesson_types = [""]
 
-classrooms = []
-classroom = ""
-classrooms.append(classroom)
+classrooms = [""]
 
-lessonIDs = []
-lessonID = ""
-lessonIDs.append(lessonID)
+lesson_ids = [""]
 
 
 class Modification:
-    modificationType = ""
-    modificationID = ""
+    modification_type = ""
+    modification_id = ""
 
 
-modificationTypes = []
-modificationType = ""
-modificationTypes.append(modificationType)
+modification_types = [""]
 
-modificationIDs = []
-modificationID = ""
-modificationIDs.append(modificationID)
+modification_ids = [""]
 
 
 class OtherActivity:
-    otherActivityTitle = ""
-    otherActivityID = ""
+    other_activity_title = ""
+    other_activity_id = ""
 
 
-OtherActivityTitles = []
-OtherActivityTitle = ""
-OtherActivityTitles.append(OtherActivityTitle)
+other_activity_titles = [""]
 
-OtherActivityIDs = []
-OtherActivityID = ""
-OtherActivityIDs.append(OtherActivityID)
+other_activity_ids = [""]
+
