@@ -1,19 +1,17 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-import api.models as myModels
-
-from django.contrib.auth.models import User
+import api.models as my_models
 
 
 class SlotSerializer(serializers.ModelSerializer):
     class Meta:
-        model = myModels.Slot
+        model = my_models.Slot
         exclude = ['slotID']
 
 
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model = myModels.Subject
+        model = my_models.Subject
         exclude = ['subjectID']
 
 
@@ -22,7 +20,7 @@ class LessonSerializer(serializers.ModelSerializer):
     slot = SlotSerializer(read_only=True)
 
     class Meta:
-        model = myModels.Lesson
+        model = my_models.Lesson
         fields = ['classroom', 'lessonType', 'subject', 'slot']
 
 
@@ -30,13 +28,13 @@ class OtherActivitySerialzier(serializers.ModelSerializer):
     slotSer = SlotSerializer(read_only=True)
 
     class Meta:
-        model = myModels.OtherActivity
+        model = my_models.OtherActivity
         fields = ['title', 'slotSer']
 
 
 class CoursePlanSerializer(serializers.ModelSerializer):
     class Meta:
-        model = myModels.CoursePlan
+        model = my_models.CoursePlan
         fields = [
             'faculty',
             'studiesMode',
@@ -51,7 +49,7 @@ class UserPlanWeekTypeSerializer(serializers.Serializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = myModels.PlanUser
+        model = my_models.PlanUser
         fields = ['id']
 
 
