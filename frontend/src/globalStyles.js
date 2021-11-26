@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import theme from "./theme";
 
 export default createGlobalStyle`
 	*{
@@ -6,7 +7,7 @@ export default createGlobalStyle`
 		margin: 0;
 		box-sizing: border-box;
 		font-family: 'Roboto', sans-serif;
-		color: #222;
+		color: ${theme.colors.text.primary}
 	}
 
 	body {

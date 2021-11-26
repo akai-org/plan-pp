@@ -1,8 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 
 import Topbar from "../../components/Topbar/Topbar";
 import CenterPanel from "./CenterPanel/CenterPanel";
-import styled from "styled-components";
 import LessonDetailCard from "../../components/LessonDetailCard/LessonDetailCard";
 import RightPanel from "./RightPanel/RightPanel";
 

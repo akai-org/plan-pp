@@ -28,7 +28,7 @@ const OtherInfo = styled.span`
 
 const ThinText = styled.span`
   font-weight: 300;
-  color: rgba(34, 34, 34, 0.75);
+  color: ${(props) => props.theme.colors.text.secondary};
 `;
 
 const LessonDetail = (props) => {

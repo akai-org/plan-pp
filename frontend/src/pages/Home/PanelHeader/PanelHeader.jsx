@@ -21,7 +21,7 @@ const PrimaryHeading = styled.span`
 `;
 
 const SecondaryHeading = styled.div`
-  color: rgba(34, 34, 34, 0.75);
+  color: ${(props) => props.theme.colors.text.secondary};
   text-transform: uppercase;
   font-weight: 300;
   font-size: 0.75rem;

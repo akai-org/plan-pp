@@ -16,7 +16,7 @@ const StyledCard = styled(Card)`
   transform: translateY(30px);
 `;
 
-const MainCard = (props) => {
+const RightPanel = (props) => {
   return (
     <StyledCard className={props.className}>
       <PanelHeader
@@ -34,4 +34,4 @@ const MainCard = (props) => {
   );
 };
 
-export default MainCard;
+export default RightPanel;

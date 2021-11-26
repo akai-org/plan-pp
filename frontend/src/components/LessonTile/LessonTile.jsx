@@ -3,9 +3,10 @@ import PropTypes, { string } from "prop-types";
 import styled from "styled-components";
 
 const Tile = styled.div`
-  color: white;
   background-color: ${(props) =>
-    props.alternativeColor ? "#669AB8" : "#0085d0"};
+    props.alternativeColor
+      ? props.theme.colors.tile.secondary
+      : props.theme.colors.tile.primary};
   border-radius: 4px;
   margin: 4px;
   min-height: 70px;
@@ -18,7 +19,7 @@ const StartTime = styled.span`
   position: absolute;
   top: 8px;
   left: 10px;
-  color: rgba(255, 255, 255, 0.75);
+  color: ${(props) => props.theme.colors.text.secondaryWhite};
   font-size: 0.75rem;
 `;
 
@@ -27,7 +28,7 @@ const EndTime = styled.span`
   position: absolute;
   bottom: 8px;
   left: 10px;
-  color: rgba(255, 255, 255, 0.75);
+  color: ${(props) => props.theme.colors.text.secondaryWhite};
   font-size: 0.75rem;
 `;
 
@@ -37,7 +38,7 @@ const Name = styled.span`
   top: 50%;
   transform: translateY(-55%);
   left: 10px;
-  color: rgba(255, 255, 255, 0.95);
+  color: ${(props) => props.theme.colors.text.primaryWhite};
 `;
 
 const Classroom = styled.span`
@@ -45,7 +46,7 @@ const Classroom = styled.span`
   position: absolute;
   bottom: 8px;
   right: 10px;
-  color: rgba(255, 255, 255, 0.75);
+  color: ${(props) => props.theme.colors.text.secondaryWhite};
   font-size: 0.75rem;
 `;
 
