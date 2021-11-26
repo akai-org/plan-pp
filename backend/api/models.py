@@ -2,11 +2,11 @@ from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import User
 
-WEEKTYPE = [(False, 'NIEPARZYSTY'),(True, 'PARZYSTY') ]
+WEEKTYPE = [(False, 'NIEPARZYSTY'), (True, 'PARZYSTY')]
 
 
-# Model for database table of plans
 class CoursePlan(models.Model):
+    """Model for database table of plans"""
     courseID = models.AutoField(primary_key=True)
     faculty = models.CharField(max_length=100)
     # stationary studies: True, extramural: False
@@ -20,43 +20,42 @@ class CoursePlan(models.Model):
     firstWeekType = models.BooleanField(choices=WEEKTYPE)
 
     def __str__(self):
-        return '{}, {}, {}, {}'.format(self.faculty, self.course, self.studiesMode, self.term)
+        return f'{self.faculty}, {self.course}, {self.studiesMode}, {self.term}'
 
 
-# table of course plans users
 class PlanUser(models.Model):
-    username = User.username
+    """table of course plans users"""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='db_user')
     group = models.ForeignKey('StudentGroup', on_delete=models.SET_NULL, null=True)
     coursePlan = models.ForeignKey('CoursePlan', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-         return 'Username: {} groupID: {} coursePlanID: {}'.format(self.username, self.group_id, self.coursePlan)
+        return f'Username: {self.user.username} groupID: {self.group_id} coursePlanID: {self.coursePlan}'
 
 
-# table for all student groups across the university, id for identyfication in database, name for students
 class StudentGroup(models.Model):
+    """table for all student groups across the university, id for identyfication in database, name for students"""
     groupID = models.AutoField(primary_key=True)
     groupName = models.CharField(max_length=10)
 
 
-# table of teachers
 class Teacher(models.Model):
+    """table of teachers"""
     teacherID = models.AutoField(primary_key=True)
     firstName = models.CharField(max_length=40)
     lastName = models.CharField(max_length=80)
     title = models.CharField(max_length=80, blank=True, null=True)
 
 
-# table connects teachers with their lessons
 class LessonTeacher(models.Model):
+    """table connects teachers with their lessons"""
     teacher = models.ForeignKey('Teacher', on_delete=models.CASCADE)
     lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE)
 
 
-# table of time slots: it includes course plan classes and individual modifications for all courses and users
-# probably the biggest table in database
 class Slot(models.Model):
+    """table of time slots: it includes course plan classes and individual modifications for all courses and users,
+    probably the biggest table in database"""
     slotID = models.AutoField(primary_key=True)
     dayOfWeek = models.PositiveSmallIntegerField()
     startHour = models.TimeField()
@@ -70,8 +69,8 @@ class Slot(models.Model):
     weekType = models.SmallIntegerField()
 
 
-# all lessons for all course plans
 class Lesson(models.Model):
+    """all lessons for all course plans"""
     slot = models.ForeignKey('Slot', on_delete=models.CASCADE)
     classroom = models.CharField(max_length=10)
     # lecture, lab, seminary etc
@@ -80,14 +79,14 @@ class Lesson(models.Model):
     subject = models.ForeignKey('Subject', on_delete=models.CASCADE)
 
 
-# activities added by user, not from course plans
 class OtherActivity(models.Model):
+    """activities added by user, not from course plans"""
     slot = models.ForeignKey('Slot', on_delete=models.CASCADE)
     title = models.CharField(max_length=40)
 
 
-# table of all subjects in all courses plans
 class Subject(models.Model):
+    """table of all subjects in all courses plans"""
     subjectID = models.AutoField(primary_key=True)
     # full name of subject
     name = models.CharField(max_length=40)
@@ -95,14 +94,14 @@ class Subject(models.Model):
     abbr = models.CharField(max_length=10)
 
 
-# table that keeps connection between student group and their lessons
 class LessonGroups(models.Model):
+    """table that keeps connection between student group and their lessons"""
     lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE)
     group = models.ForeignKey('StudentGroup', on_delete=models.CASCADE)
 
 
-# table keeps modifications of all users
 class Modification(models.Model):
+    """table keeps modifications of all users"""
     TYPES = [(-1, 'REMOVE'), (1, 'ADD')]
     type = models.SmallIntegerField()
     slot = models.ForeignKey('Slot', on_delete=models.CASCADE)

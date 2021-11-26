@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from .serializers import UserSerializer, LoginSerializer
 import datetime
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import mixins, viewsets
 
 
 # Create your views here.
@@ -16,59 +18,40 @@ class CoursePlanList(APIView):
         return Response(serializer.data)
 
 
-"""
-Return user plans and groups
-"""
 def userRelated(user):
-    try:
-        userRelatedObjects = myModels.PlanUser.objects.get(user_id=user.id)
-    except myModels.PlanUser.DoesNotExist:
-        raise myModels.PlanUser.DoesNotExist
-    return userRelatedObjects
+    """ Return user plans and groups """
+    return myModels.PlanUser.objects.get(user_id=user.id)
 
 
-"""Returns course plan"""
 def planByID(planID):
-    try:
-        plan = myModels.CoursePlan.objects.get(pk=planID)
-    except myModels.CoursePlan.DoesNotExist:
-        return myModels.CoursePlan.DoesNotExist
-    return plan
+    """Returns course plan"""
+    return myModels.CoursePlan.objects.get(pk=planID)
 
 
-""""
-Return week type for current week +- offset weeks for designated user
-Return True or False according to models.WEEKTYPE
-"""
 def userPlanWeekType(user, offset):
+    """"
+    Return week type for current week +- offset weeks for designated user
+    Return True or False according to models.WEEKTYPE
+    """
     try:
         userObjects = userRelated(user)
     except myModels.PlanUser.DoesNotExist:
-        raise myModels.PlanUser.DoesNotExist
+        return Response({'error': "Brak użytkownika"})
+
     try:
-        # plan = myModels.CoursePlan.objects.get(pk=plan.coursePlan_id)
         plan = planByID(userObjects.coursePlan_id)
     except myModels.CoursePlan.DoesNotExist:
-        return myModels.CoursePlan.DoesNotExist
+        return Response({'error': "Użytkownik nie ma planu"})
+
     daysFromStart = datetime.date.today() - plan.startAt
-    weeks = daysFromStart.days // 7
-    weeks += abs(offset)
-    even = False
-    if weeks % 2 == 0:
-        even = True
+    even = not bool(((daysFromStart.days // 7) + abs(offset)) % 2)
     return even
 
 
 class UserPlanWeekType(APIView):
     def get(self, request, offset, format=None):
         currentUser = request.user
-        offset = int(offset)
-        try:
-            answer = userPlanWeekType(currentUser, offset)
-        except myModels.CoursePlan.DoesNotExist:
-            return Response({'error': "Użytkownik nie ma planu"})
-        except myModels.PlanUser.DoesNotExist:
-            return Response({'error': "Brak użytkownika"})
+        answer = userPlanWeekType(currentUser, offset)
         answer = myModels.WEEKTYPE[answer][1]
         return Response({'weektype': answer})
 
