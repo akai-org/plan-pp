@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Card from "../../components/UI/Card";
-import Topbar from "../../components/Topbar/Topbar";
 import YearSelector from "./YearSelector/YearSelector";
 
 const Container = styled(Card)`
@@ -28,7 +27,6 @@ const SmallText = styled.span`
 const Landing = (props) => {
   return (
     <>
-      <Topbar />
       <Container>
         <Title>Przeglądaj plany</Title>
         <SmallText>Zaloguj się, aby łatwo wracać do swojego planu</SmallText>

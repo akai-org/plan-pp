@@ -30,8 +30,18 @@ const MainCard = (props) => {
         secondaryHeading="tydzien nieparzysty"
       />
       <LessonList>
-        <LessonTile />
-        <LessonTile />
+        <LessonTile
+          start="16:50"
+          end="18:20"
+          name="Spotkanie koła"
+          classroom="125BT"
+        />
+        <LessonTile
+          start="16:50"
+          end="18:20"
+          name="Spotkanie koła"
+          classroom="125BT"
+        />
       </LessonList>
       <StyledButton>Zobacz pełny plan na tydzień</StyledButton>
     </StyledCard>

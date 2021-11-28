@@ -25,8 +25,20 @@ const RightPanel = (props) => {
         secondaryHeading="tydzien nieparzysty"
       />
       <LessonList>
-        <LessonTile alternative />
-        <LessonTile alternative />
+        <LessonTile
+          alternative
+          start="16:50"
+          end="18:20"
+          name="Spotkanie koła"
+          classroom="125BT"
+        />
+        <LessonTile
+          alternative
+          start="16:50"
+          end="18:20"
+          name="Spotkanie koła"
+          classroom="125BT"
+        />
       </LessonList>
       {/* Pusty div potrzebny żeby layout sie nie popsuł */}
       <div />

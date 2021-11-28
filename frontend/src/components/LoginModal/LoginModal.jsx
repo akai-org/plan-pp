@@ -54,7 +54,11 @@ const SmallText = styled.span`
 
 const LoginModal = (props) => {
   return (
-    <StyledModal open={props.open} onClose={props.onClose}>
+    <StyledModal
+      open={props.open}
+      onClose={props.onClose}
+      className={props.className}
+    >
       <FlexContainer>
         <LogoImg src={logo} />
         <Title>Logowanie</Title>
@@ -67,7 +71,12 @@ const LoginModal = (props) => {
           <Input />
         </InputWrapper>
         <LoginButton>Zaloguj się</LoginButton>
-        <SmallText>Nie masz konta? Zarejestruj się</SmallText>
+        <SmallText>
+          Nie masz konta?{" "}
+          <Button variant="link" onClick={props.onSwitchType}>
+            Zarejestruj się
+          </Button>
+        </SmallText>
         <SmallText>Odzyskiwanie hasła</SmallText>
       </FlexContainer>
     </StyledModal>
@@ -77,6 +86,8 @@ const LoginModal = (props) => {
 LoginModal.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
+  onSwitchType: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default LoginModal;

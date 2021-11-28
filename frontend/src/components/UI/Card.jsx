@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const StyledCard = styled.div`
   padding: 1rem;
@@ -10,6 +11,11 @@ const StyledCard = styled.div`
 
 const Card = (props) => {
   return <StyledCard {...props}>{props.children}</StyledCard>;
+};
+
+Card.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default Card;

@@ -55,7 +55,7 @@ const Topbar = (props) => {
       {props.loggedIn ? (
         <AccountIndicator />
       ) : (
-        <LoginButton>Zaloguj się</LoginButton>
+        <LoginButton onClick={props.onLoginClick}>Zaloguj się</LoginButton>
       )}
     </Bar>
   );
@@ -63,6 +63,8 @@ const Topbar = (props) => {
 
 Topbar.propTypes = {
   loggedIn: PropTypes.bool,
+  onLoginClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default Topbar;

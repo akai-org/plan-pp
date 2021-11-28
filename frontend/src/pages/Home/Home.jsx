@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import Topbar from "../../components/Topbar/Topbar";
 import CenterPanel from "./CenterPanel/CenterPanel";
 import LessonDetailCard from "../../components/LessonDetailCard/LessonDetailCard";
 import RightPanel from "./RightPanel/RightPanel";
@@ -23,7 +22,6 @@ const LeftPanel = styled(LessonDetailCard)`
 const Home = (props) => {
   return (
     <>
-      <Topbar loggedIn={true} />
       <Container>
         <LeftPanel></LeftPanel>
         <CenterPanel></CenterPanel>

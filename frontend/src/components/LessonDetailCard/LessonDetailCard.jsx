@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import LessonDetail from "./LessonDetail/LessonDetail";
+import PropTypes from "prop-types";
 
 const Header = styled.div`
   display: flex;
@@ -70,6 +71,10 @@ const LeftCard = (props) => {
       <EditButton>Edytuj</EditButton>
     </StyledCard>
   );
+};
+
+LeftCard.propTypes = {
+  className: PropTypes.string,
 };
 
 export default LeftCard;

@@ -53,10 +53,10 @@ const Classroom = styled.span`
 const LessonTile = (props) => {
   return (
     <Tile className={props.className} alternativeColor={props.alternative}>
-      <Name>Spotkanie Koła</Name>
-      <StartTime>16:50</StartTime>
-      <EndTime>18:20</EndTime>
-      <Classroom>125BT</Classroom>
+      <Name>{props.name}</Name>
+      <StartTime>{props.start}</StartTime>
+      <EndTime>{props.end}</EndTime>
+      <Classroom>{props.classroom}</Classroom>
     </Tile>
   );
 };
@@ -64,6 +64,10 @@ const LessonTile = (props) => {
 LessonTile.propTypes = {
   className: string,
   alternative: PropTypes.bool,
+  name: PropTypes.string,
+  start: PropTypes.string,
+  end: PropTypes.string,
+  classroom: PropTypes.string,
 };
 
 export default LessonTile;
