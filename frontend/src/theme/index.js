@@ -6,6 +6,7 @@ const theme = {
       tertiary: "#22222273",
       primaryWhite: "#FFFFFFF2",
       secondaryWhite: "#FFFFFFBF",
+      link: "#669AB8",
     },
     tile: {
       primary: "#0085D0",

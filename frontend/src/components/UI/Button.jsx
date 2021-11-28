@@ -6,6 +6,7 @@ const StyledButton = styled.button`
   border-radius: 4px;
   background-color: ${(props) => props.theme.colors.button.background};
   border: 2px solid ${(props) => props.theme.colors.button.border};
+  cursor: pointer;
 `;
 
 const Button = (props) => {

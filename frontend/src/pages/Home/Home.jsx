@@ -23,7 +23,7 @@ const LeftPanel = styled(LessonDetailCard)`
 const Home = (props) => {
   return (
     <>
-      <Topbar></Topbar>
+      <Topbar loggedIn={true} />
       <Container>
         <LeftPanel></LeftPanel>
         <CenterPanel></CenterPanel>

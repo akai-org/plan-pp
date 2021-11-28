@@ -17,7 +17,7 @@ const ModalWindow = styled.div`
 const Modal = (props) => {
   return props.open ? (
     <>
-      <ModalWindow>{props.children}</ModalWindow>
+      <ModalWindow className={props.className}>{props.children}</ModalWindow>
       <Overlay onClick={props.onClose} />
     </>
   ) : null;
@@ -27,6 +27,7 @@ Modal.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
   children: PropTypes.node,
+  className: PropTypes.string,
 };
 
 export default Modal;

@@ -13,4 +13,8 @@ export default createGlobalStyle`
 	body {
 		background: #F8F8F8;
 	}
+
+	a {
+		color: ${theme.colors.text.link}
+	}
 `;

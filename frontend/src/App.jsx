@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
+import Landing from "./pages/Landing/Landing";
 import Card from "./components/UI/Card";
 import GlobalStyles from "./globalStyles";
 import { ThemeProvider } from "styled-components";
@@ -14,7 +15,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/home" element={<Home />} />
-            <Route path="/landing" element={<p>landing page</p>} />
+            <Route path="/landing" element={<Landing />} />
             <Route
               path="/week"
               element={

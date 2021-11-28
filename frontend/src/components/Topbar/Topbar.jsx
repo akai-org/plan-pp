@@ -1,9 +1,11 @@
 import React from "react";
 import logo from "../../resources/AKAI-LOGO.png";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 import Clock from "./Clock/Clock";
 import AccountIndicator from "./AccountIndicator/AccountIndicator";
+import Button from "../UI/Button";
 
 const LogoImg = styled.img`
   height: 100%;
@@ -38,6 +40,10 @@ const CenteredClock = styled(Clock)`
   transform: translateX(50%);
 `;
 
+const LoginButton = styled(Button)`
+  margin-right: 2em;
+`;
+
 const Topbar = (props) => {
   return (
     <Bar className={props.className}>
@@ -46,9 +52,17 @@ const Topbar = (props) => {
         <Title>AKAI Plan Zajęć</Title>
       </Logo>
       <CenteredClock />
-      <AccountIndicator />
+      {props.loggedIn ? (
+        <AccountIndicator />
+      ) : (
+        <LoginButton>Zaloguj się</LoginButton>
+      )}
     </Bar>
   );
+};
+
+Topbar.propTypes = {
+  loggedIn: PropTypes.bool,
 };
 
 export default Topbar;
