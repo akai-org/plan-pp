@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "../UI/Modal/Modal";
 import PropTypes from "prop-types";
 import logo from "../../resources/AKAI-LOGO.png";
 import Button from "../UI/Button";
+import { useForm } from "react-hook-form";
 
 const StyledModal = styled(Modal)`
   min-width: 320px;
@@ -22,6 +23,21 @@ const FlexContainer = styled.div`
 const Title = styled.h4`
   font-family: "Roboto Slab", serif;
   font-size: 1.5rem;
+`;
+
+const MessageBox = styled.div`
+  background: rgb(255, 199, 199);
+  color: crimson;
+  padding: 1em;
+  border: 2px solid crimson;
+  margin: 10px 0;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 `;
 
 const InputWrapper = styled.div`
@@ -43,9 +59,10 @@ const Label = styled.label`
   font-size: 0.8rem;
 `;
 
-const LoginButton = styled(Button)`
+const LoginButton = styled.input`
   margin: 10px 0;
   min-width: 120px;
+  padding: 4px;
 `;
 
 const SmallText = styled.span`
@@ -53,6 +70,14 @@ const SmallText = styled.span`
 `;
 
 const LoginModal = (props) => {
+  const { register, handleSubmit } = useForm();
+  const [message, setMessage] = useState("");
+
+  const onSubmit = (data) => {
+    alert("logowanie");
+    //Wysłanie zapytania do Api
+  };
+
   return (
     <StyledModal
       open={props.open}
@@ -62,15 +87,18 @@ const LoginModal = (props) => {
       <FlexContainer>
         <LogoImg src={logo} />
         <Title>Logowanie</Title>
-        <InputWrapper>
-          <Label>Login:</Label>
-          <Input />
-        </InputWrapper>
-        <InputWrapper>
-          <Label>Hasło:</Label>
-          <Input />
-        </InputWrapper>
-        <LoginButton>Zaloguj się</LoginButton>
+        {message && <MessageBox>{message}</MessageBox>}
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <InputWrapper>
+            <Label>Login:</Label>
+            <Input {...register("login", { requred: true })} />
+          </InputWrapper>
+          <InputWrapper>
+            <Label>Hasło:</Label>
+            <Input {...register("password", { requred: true })} />
+          </InputWrapper>
+          <LoginButton type="submit" value="Zaloguj się" />
+        </Form>
         <SmallText>
           Nie masz konta?{" "}
           <Button variant="link" onClick={props.onSwitchType}>

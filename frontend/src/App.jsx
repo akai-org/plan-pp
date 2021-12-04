@@ -42,6 +42,7 @@ const App = () => {
                 </Card>
               }
             />
+            <Route path="/settings" element={<p>Ustawiena konta</p>} />
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
         </BrowserRouter>

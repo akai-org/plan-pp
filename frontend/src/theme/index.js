@@ -7,6 +7,7 @@ const theme = {
       primaryWhite: "#FFFFFFF2",
       secondaryWhite: "#FFFFFFBF",
       link: "#0085D0",
+      error: "#FF1919",
     },
     tile: {
       primary: "#0085D0",
