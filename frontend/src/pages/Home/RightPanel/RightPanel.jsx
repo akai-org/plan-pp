@@ -13,7 +13,7 @@ const StyledCard = styled(Card)`
   border-radius: 12px;
   min-height: 500px;
   min-width: 300px;
-  transform: translateY(30px);
+  margin:40px 0;
 `;
 
 const RightPanel = (props) => {
