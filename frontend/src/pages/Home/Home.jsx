@@ -16,7 +16,7 @@ const Container = styled.div`
 `;
 
 const LeftPanel = styled(LessonDetailCard)`
-  transform: translateY(30px);
+  margin:40px 0;
 `;
 
 const Home = (props) => {
