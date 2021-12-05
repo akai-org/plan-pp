@@ -1,12 +1,14 @@
+from rest_framework.response import Response
 from rest_framework.views import APIView
 import api.models as my_models
 import api.serializers as my_serializers
 from rest_framework import generics, permissions
-from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-from .serializers import UserSerializer, LoginSerializer
+from django.http import JsonResponse
+from rest_framework.authtoken import views
+from .serializers import UserSerializer
 from rest_framework.generics import ListAPIView
 import datetime
+from rest_framework.permissions import IsAuthenticated
 
 
 # Create your views here.
@@ -61,17 +63,9 @@ class UserAPIView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
     def get_object(self):
-        return self.request.user
+        return self.request.user.data
 
-
-class LoginAPIView(generics.GenericAPIView):
-    serializer_class = LoginSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
-        return Response({
-            "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": Token.objects.get_or_create(user=user)[0].key
-        })
+class LogoutAPIView(views.ObtainAuthToken):
+    def get(self, request):
+        request.user.auth_token.delete()
+        return Response({"Wylogowano pomyslnie"})
