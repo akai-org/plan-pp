@@ -10,11 +10,12 @@ import {
   MdCalendarToday as iconCalendar,
   MdViewAgenda as iconAgenda,
 } from "react-icons/md";
+import PropTypes from "prop-types";
 
 const Wrapper = styled.div`
   display: grid;
   position: relative;
-  grid-template-columns: 1fr 25px;
+  grid-template-columns: auto-fill;
   align-items: center;
   text-align: right;
   column-gap: 10px;
@@ -54,33 +55,60 @@ const AccountIndicator = (props) => {
 
   return (
     <Wrapper className={props.className}>
-      <UserName>Jan Kowalski</UserName>
-      <UserInfo>Sztuczna Inteligencja sem. I gr. 2</UserInfo>
-      <IconDown onClick={() => setMenuOpen(!menuOpen)} />
-      <Menu open={menuOpen} onClose={() => setMenuOpen(false)}>
-        <DropdownMenuItem
-          label="Ustawienia konta"
-          icon={iconAccount}
-          onClick={() => navigate("/settings")}
-        />
-        <DropdownMenuItem
-          label="Wyloguj"
-          icon={iconLogout}
-          onClick={() => alert("wylogowanie")}
-        />
-        <DropdownMenuItem
-          label="Widok tygodnia"
-          icon={iconCalendar}
-          onClick={() => navigate("/week")}
-        />
-        <DropdownMenuItem
-          label="Agenda"
-          icon={iconAgenda}
-          onClick={() => navigate("/")}
-        />
-      </Menu>
+      <UserName>{props.user?.name}</UserName>
+      <UserInfo>
+        {props.user?.fieldOfStudy} sem. {props.user?.semester} gr.{" "}
+        {props.user?.group}
+      </UserInfo>
+      {props.includeMenu && (
+        <>
+          <IconDown onClick={() => setMenuOpen(!menuOpen)} />
+          <Menu open={menuOpen} onClick={() => setMenuOpen(false)}>
+            <DropdownMenuItem
+              label="Ustawienia konta"
+              icon={iconAccount}
+              onClick={() => navigate("/settings")}
+            />
+            <DropdownMenuItem
+              label="Wyloguj"
+              icon={iconLogout}
+              onClick={props.onLogout}
+            />
+            <DropdownMenuItem
+              label="Widok tygodnia"
+              icon={iconCalendar}
+              onClick={() => navigate("/week")}
+            />
+            <DropdownMenuItem
+              label="Agenda"
+              icon={iconAgenda}
+              onClick={() => navigate("/")}
+            />
+          </Menu>
+        </>
+      )}
     </Wrapper>
   );
+};
+AccountIndicator.propTypes = {
+  className: PropTypes.string,
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    semester: PropTypes.number,
+    fieldOfStudy: PropTypes.string,
+    group: PropTypes.string,
+  }),
+  onLogout: PropTypes.func,
+  includeMenu: PropTypes.bool,
+};
+
+AccountIndicator.defaultProps = {
+  user: {
+    name: "Jan Kowalski",
+    semester: 2,
+    fieldOfStudy: "Sztuczna Inteligencja",
+    group: "SI 4",
+  },
 };
 
 export default AccountIndicator;

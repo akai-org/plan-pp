@@ -13,10 +13,11 @@ const StyledOverlay = styled.div`
 `;
 
 const Overlay = (props) => {
-  return <StyledOverlay onClick={props.onClick} />;
+  return <StyledOverlay {...props} />;
 };
 
 Overlay.propTypes = {
+  className: PropTypes.string,
   onClick: PropTypes.func,
 };
 

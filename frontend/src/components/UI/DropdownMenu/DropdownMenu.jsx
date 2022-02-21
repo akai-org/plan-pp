@@ -4,13 +4,15 @@ import PropTypes from "prop-types";
 import Card from "../Card";
 
 const Menu = styled(Card)`
-  z-index: 10;
+  z-index: 200;
   padding: 0;
 `;
 
 const DropdownMenu = (props) => {
   return props.open ? (
-    <Menu className={props.className}>{props.children}</Menu>
+    <Menu className={props.className} onClick={props.onClick}>
+      {props.children}
+    </Menu>
   ) : null;
 };
 
@@ -18,7 +20,7 @@ DropdownMenu.propTypes = {
   className: PropTypes.string,
   open: PropTypes.bool,
   children: PropTypes.node,
-  onClose: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export default DropdownMenu;

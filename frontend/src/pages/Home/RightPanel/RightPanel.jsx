@@ -14,6 +14,11 @@ const StyledCard = styled(Card)`
   min-height: 500px;
   min-width: 300px;
   margin:40px 0;
+  @media screen and (max-width: 1024px){
+    margin: 0;
+    width: 100%;
+    max-width: 500px;
+  }
 `;
 
 const RightPanel = (props) => {

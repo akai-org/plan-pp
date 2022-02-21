@@ -24,9 +24,12 @@ const Clock = (props) => {
   const [time, setTime] = useState(dayjs());
 
   useEffect(() => {
-    setInterval(() => {
+    const intervalId = setInterval(() => {
       setTime(dayjs());
     }, 1000);
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (

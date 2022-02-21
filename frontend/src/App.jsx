@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { useMediaPredicate } from "react-media-hook";
 
 import LoginModal from "./components/LoginModal/LoginModal";
 import SignupModal from "./components/SignupModal/SignupModal";
@@ -10,10 +11,12 @@ import Card from "./components/UI/Card";
 import GlobalStyles from "./globalStyles";
 import theme from "./theme";
 import Topbar from "./components/Topbar/Topbar";
+import MobileBar from "./components/MobileBar/MobileBar";
 
 const App = () => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [SignupModalOpen, setSignupModalOpen] = useState(false);
+  const underSmallSize = useMediaPredicate("(max-width: 600px)");
 
   const switchModalType = () => {
     if (loginModalOpen) {
@@ -30,7 +33,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <BrowserRouter>
-          <Topbar onLoginClick={() => setLoginModalOpen(true)} />
+          <Topbar onLoginClick={() => setLoginModalOpen(true)} loggedIn />
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/landing" element={<Landing />} />
@@ -45,6 +48,9 @@ const App = () => {
             <Route path="/settings" element={<p>Ustawiena konta</p>} />
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
+          {underSmallSize && (
+            <MobileBar onLoginClick={() => setLoginModalOpen(true)} />
+          )}
         </BrowserRouter>
         <LoginModal
           open={loginModalOpen}

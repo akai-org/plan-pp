@@ -4,10 +4,13 @@ import Card from "../../components/UI/Card";
 import YearSelector from "./YearSelector/YearSelector";
 
 const Container = styled(Card)`
-  max-width: 1000px;
+  max-width: 850px;
   margin: 50px auto 0;
   border-radius: 10px;
   padding: 2em;
+  @media screen and (max-width: 900px) {
+    margin: 50px 1em;
+  }
 `;
 
 const Title = styled.h2`

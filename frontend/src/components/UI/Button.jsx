@@ -8,6 +8,10 @@ const NormalButton = styled.button`
   background-color: ${(props) => props.theme.colors.button.background};
   border: 2px solid ${(props) => props.theme.colors.button.border};
   cursor: pointer;
+  @media screen and (max-width: 600px) {
+    padding: 8px 12px;
+    border-radius: 12px;
+  }
 `;
 
 const LinkButton = styled.button`
@@ -26,7 +30,7 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-  variant: PropTypes.oneOf(["normal", "link"]),
+  // variant: PropTypes.oneOf(["normal", "link"]),
   children: PropTypes.node,
   onClick: PropTypes.func,
   className: PropTypes.string,

@@ -15,6 +15,10 @@ const StyledCard = styled(Card)`
   min-height: 500px;
   min-width: 300px;
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.2);
+  @media screen and (max-width: 1024px){
+    width: 100%;
+    max-width: 500px;
+  }
 `;
 
 const StyledButton = styled(Button)`

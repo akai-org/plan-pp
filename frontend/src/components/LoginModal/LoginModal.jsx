@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Modal from "../UI/Modal/Modal";
 import PropTypes from "prop-types";
-import logo from "../../resources/AKAI-LOGO.png";
-import Button from "../UI/Button";
 import { useForm } from "react-hook-form";
+import { useMediaPredicate } from "react-media-hook";
+
+import Modal from "../UI/Modal/Modal";
+import Button from "../UI/Button";
+import logo from "../../resources/AKAI-LOGO.png";
 
 const StyledModal = styled(Modal)`
   min-width: 320px;
@@ -12,17 +14,20 @@ const StyledModal = styled(Modal)`
 
 const LogoImg = styled.img`
   max-width: 150px;
+  margin: auto;
 `;
 
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: strech;
 `;
 
 const Title = styled.h4`
   font-family: "Roboto Slab", serif;
   font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
 `;
 
 const MessageBox = styled.div`
@@ -45,14 +50,19 @@ const InputWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  margin: 15px 0;
+  margin: 8px 0;
 `;
 
 const Input = styled.input`
-  border-radius: 4px;
-  border-width: 1px;
+  border-radius: 8px;
+  border: 1px solid #999;
   width: 100%;
-  padding: 2px;
+  padding: 6px 4px;
+  margin-top: 4px;
+
+  @media screen and (max-width: 900px) {
+    padding: 8px 4px;
+  }
 `;
 
 const Label = styled.label`
@@ -60,18 +70,26 @@ const Label = styled.label`
 `;
 
 const LoginButton = styled.input`
-  margin: 10px 0;
+  margin: 20px 0;
   min-width: 120px;
-  padding: 4px;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #999;
+
+  @media screen and (max-width: 600px) {
+    min-width: 150px;
+  }
 `;
 
 const SmallText = styled.span`
   font-size: 0.8rem;
+  text-align: center;
 `;
 
 const LoginModal = (props) => {
   const { register, handleSubmit } = useForm();
   const [message, setMessage] = useState("");
+  const overSmallSize = useMediaPredicate("(min-width: 600px)");
 
   const onSubmit = (data) => {
     alert("logowanie");
@@ -85,7 +103,7 @@ const LoginModal = (props) => {
       className={props.className}
     >
       <FlexContainer>
-        <LogoImg src={logo} />
+        {overSmallSize && <LogoImg src={logo} />}
         <Title>Logowanie</Title>
         {message && <MessageBox>{message}</MessageBox>}
         <Form onSubmit={handleSubmit(onSubmit)}>

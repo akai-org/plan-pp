@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Modal from "../UI/Modal/Modal";
 import PropTypes from "prop-types";
-import logo from "../../resources/AKAI-LOGO.png";
-import Button from "../UI/Button";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useMediaPredicate } from "react-media-hook";
+
+import Button from "../UI/Button";
+import Modal from "../UI/Modal/Modal";
+import logo from "../../resources/AKAI-LOGO.png";
 
 const StyledModal = styled(Modal)`
   min-width: 320px;
@@ -14,17 +16,20 @@ const StyledModal = styled(Modal)`
 
 const LogoImg = styled.img`
   max-width: 150px;
+  margin: auto;
 `;
 
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: strech;
 `;
 
 const Title = styled.h4`
   font-family: "Roboto Slab", serif;
   font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
 `;
 
 const MessageBox = styled.div`
@@ -47,21 +52,19 @@ const InputWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  margin: 10px 0;
+  margin: 8px 0;
 `;
 
 const Input = styled.input`
-  border-radius: 4px;
-  border-width: 1px;
+  border-radius: 8px;
+  border: 1px solid #999;
   width: 100%;
-  padding: 4px;
-`;
+  padding: 6px 4px;
+  margin-top: 4px;
 
-const InputMsg = styled.span`
-  font-size: 0.9rem;
-  color: ${(props) => props.theme.colors.text.error};
-  max-width: 300px;
-  margin-top: 1px; /*inaczej styka się z inputem */
+  @media screen and (max-width: 900px) {
+    padding: 8px 4px;
+  }
 `;
 
 const Label = styled.label`
@@ -69,13 +72,27 @@ const Label = styled.label`
 `;
 
 const SignupButton = styled.input`
-  margin: 10px 0;
-  min-width: 120px;
-  padding: 4px;
+  margin: 20px 0;
+  min-width: 150px;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #999;
+
+  @media screen and (max-width: 600px) {
+    min-width: 150px;
+  }
 `;
 
 const SmallText = styled.span`
   font-size: 0.8rem;
+  text-align: center;
+`;
+
+const InputMsg = styled.span`
+  font-size: 0.9rem;
+  color: ${(props) => props.theme.colors.text.error};
+  max-width: 300px;
+  margin-top: 1px; /*inaczej styka się z inputem */
 `;
 
 const schema = yup
@@ -98,7 +115,7 @@ const schema = yup
   })
   .required();
 
-const LoginModal = (props) => {
+const SignupModal = (props) => {
   const {
     handleSubmit,
     register,
@@ -107,6 +124,7 @@ const LoginModal = (props) => {
     resolver: yupResolver(schema),
   });
   const [message, setMessage] = useState("");
+  const overSmallSize = useMediaPredicate("(min-width: 600px)");
 
   const onSubmit = (data) => {
     alert("Zakładanie konta");
@@ -119,7 +137,7 @@ const LoginModal = (props) => {
       className={props.className}
     >
       <FlexContainer>
-        <LogoImg src={logo} />
+        {overSmallSize && <LogoImg src={logo} />}
         <Title>Rejestracja</Title>
         {message && <MessageBox>{message}</MessageBox>}
         <Form onSubmit={handleSubmit(onSubmit)}>
@@ -151,11 +169,11 @@ const LoginModal = (props) => {
   );
 };
 
-LoginModal.propTypes = {
+SignupModal.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onSwitchType: PropTypes.func,
   className: PropTypes.string,
 };
 
-export default LoginModal;
+export default SignupModal;

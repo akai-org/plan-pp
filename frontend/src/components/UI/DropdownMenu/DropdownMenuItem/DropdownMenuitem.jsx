@@ -8,7 +8,7 @@ const Item = styled.div`
   padding: 12px;
   font-size: 1.1rem;
   gap: 5px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: ${(props) => (props.noBorder ? "none" : "1px solid #ccc")};
   cursor: pointer;
   transition: all 200ms ease;
   &:hover {
@@ -23,7 +23,7 @@ const IconWrapper = styled.span`
 
 const DropdownMenuItem = (props) => {
   return (
-    <Item className={props.className} onClick={props.onClick}>
+    <Item {...props}>
       <IconWrapper>
         <props.icon />
       </IconWrapper>
@@ -33,10 +33,11 @@ const DropdownMenuItem = (props) => {
 };
 
 DropdownMenuItem.propTypes = {
-  icon: PropTypes.element,
+  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   label: PropTypes.string,
   onClick: PropTypes.func,
   className: PropTypes.string,
+  noBorder: PropTypes.bool,
 };
 
 export default DropdownMenuItem;

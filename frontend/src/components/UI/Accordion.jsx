@@ -12,6 +12,9 @@ const Bar = styled.div`
   border-bottom: 1px solid lightgray;
   padding: 8px 0;
   cursor: pointer;
+  @media screen and (max-width: 600px) {
+    padding: 12px 0;
+  }
 `;
 
 const ContentWrapper = styled.div`
