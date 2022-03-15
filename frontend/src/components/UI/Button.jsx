@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import theme from "../../theme";
 
 const NormalButton = styled.button`
   padding: 1px 8px;
@@ -22,11 +23,33 @@ const LinkButton = styled.button`
   cursor: pointer;
 `;
 
-const Button = (props) => {
-  if (props.variant === "link") {
-    return <LinkButton {...props}>{props.children}</LinkButton>;
+const TransparentButton = styled.button`
+  background: transparent;
+  display: inline-flex;
+  color: ${(props) => theme.colors.text.primary};
+  border: none;
+  align-items: center;
+  padding: 4px 8px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
   }
-  return <NormalButton {...props}>{props.children}</NormalButton>;
+  &:disabled {
+    color: gray;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+`;
+
+const Button = (props) => {
+  switch (props.variant) {
+    case "link":
+      return <LinkButton {...props}>{props.children}</LinkButton>;
+    case "transparent":
+      return <TransparentButton {...props}>{props.children}</TransparentButton>;
+    default:
+      return <NormalButton {...props}>{props.children}</NormalButton>;
+  }
 };
 
 Button.propTypes = {

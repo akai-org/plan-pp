@@ -7,7 +7,7 @@ import LoginModal from "./components/LoginModal/LoginModal";
 import SignupModal from "./components/SignupModal/SignupModal";
 import Home from "./pages/Home/Home";
 import Landing from "./pages/Landing/Landing";
-import Card from "./components/UI/Card";
+import Week from './pages/Week/Week';
 import GlobalStyles from "./globalStyles";
 import theme from "./theme";
 import Topbar from "./components/Topbar/Topbar";
@@ -40,9 +40,7 @@ const App = () => {
             <Route
               path="/week"
               element={
-                <Card>
-                  <p>week page</p>
-                </Card>
+                <Week />
               }
             />
             <Route path="/settings" element={<p>Ustawiena konta</p>} />

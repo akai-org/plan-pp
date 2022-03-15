@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes, { string } from "prop-types";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Tile = styled.div`
@@ -10,7 +10,7 @@ const Tile = styled.div`
   border-radius: 4px;
   margin: 4px;
   min-height: 70px;
-  min-width: 200px;
+  min-width: 150px;
   position: relative;
 `;
 
@@ -62,7 +62,6 @@ const LessonTile = (props) => {
 };
 
 LessonTile.propTypes = {
-  className: string,
   alternative: PropTypes.bool,
   name: PropTypes.string,
   start: PropTypes.string,

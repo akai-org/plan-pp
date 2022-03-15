@@ -5,6 +5,7 @@ import LessonTile from "../../../components/LessonTile/LessonTile";
 import styled from "styled-components";
 import PanelHeader from "../PanelHeader/PanelHeader";
 import LessonList from "../LessonList/LessonList";
+import { useNavigate } from "react-router";
 
 const StyledCard = styled(Card)`
   display: inline-flex;
@@ -26,6 +27,8 @@ const StyledButton = styled(Button)`
 `;
 
 const MainCard = (props) => {
+  const navigate = useNavigate();
+
   return (
     <StyledCard className={props.className}>
       <PanelHeader
@@ -47,7 +50,7 @@ const MainCard = (props) => {
           classroom="125BT"
         />
       </LessonList>
-      <StyledButton>Zobacz pełny plan na tydzień</StyledButton>
+      <StyledButton onClick={() => navigate("/week")}>Zobacz pełny plan na tydzień</StyledButton>
     </StyledCard>
   );
 };
