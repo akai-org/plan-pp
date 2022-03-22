@@ -1,11 +1,13 @@
 import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router";
+import "dayjs/locale/pl";
+
 import Card from "../../../components/UI/Card";
 import Button from "../../../components/UI/Button";
 import LessonTile from "../../../components/LessonTile/LessonTile";
-import styled from "styled-components";
 import PanelHeader from "../PanelHeader/PanelHeader";
 import LessonList from "../LessonList/LessonList";
-import { useNavigate } from "react-router";
 
 const StyledCard = styled(Card)`
   display: inline-flex;
@@ -16,7 +18,7 @@ const StyledCard = styled(Card)`
   min-height: 500px;
   min-width: 300px;
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.2);
-  @media screen and (max-width: 1024px){
+  @media screen and (max-width: 1024px) {
     width: 100%;
     max-width: 500px;
   }
@@ -33,24 +35,27 @@ const MainCard = (props) => {
     <StyledCard className={props.className}>
       <PanelHeader
         title="Dzisiaj"
-        primaryHeading="Poniedziałek - 25.10"
-        secondaryHeading="tydzien nieparzysty"
+        primaryHeading={props.date.locale("pl").format("dddd - DD.MM")}
+        secondaryHeading={`Tydzień  ${
+          props.date.week() % 2 === 0 ? "Parzysty" : "Nieparzysty"
+        }`}
       />
       <LessonList>
-        <LessonTile
-          start="16:50"
-          end="18:20"
-          name="Spotkanie koła"
-          classroom="125BT"
-        />
-        <LessonTile
-          start="16:50"
-          end="18:20"
-          name="Spotkanie koła"
-          classroom="125BT"
-        />
+        {props.lessons?.map(lesson => (
+          <LessonTile
+            name={lesson.name}
+            classroom={lesson.classroom}
+            start={("0" + lesson.start_hour).slice(-2) + ":" + ("0" + lesson.start_minutes).slice(-2)}
+            end={("0" + lesson.end_hour).slice(-2) + ":" + ("0" + lesson.end_minutes).slice(-2)}
+            key={lesson.id}
+            onClick={() => props.onLessonSelected(lesson)}
+            selected={lesson.id === props.selectedLesson?.id}
+          />
+        ))}
       </LessonList>
-      <StyledButton onClick={() => navigate("/week")}>Zobacz pełny plan na tydzień</StyledButton>
+      <StyledButton onClick={() => navigate("/week")}>
+        Zobacz pełny plan na tydzień
+      </StyledButton>
     </StyledCard>
   );
 };

@@ -13,8 +13,8 @@ const StyledCard = styled(Card)`
   border-radius: 12px;
   min-height: 500px;
   min-width: 300px;
-  margin:40px 0;
-  @media screen and (max-width: 1024px){
+  margin: 40px 0;
+  @media screen and (max-width: 1024px) {
     margin: 0;
     width: 100%;
     max-width: 500px;
@@ -26,24 +26,24 @@ const RightPanel = (props) => {
     <StyledCard className={props.className}>
       <PanelHeader
         title="Jutro"
-        primaryHeading="Wtorek - 26.10"
-        secondaryHeading="tydzien nieparzysty"
+        primaryHeading={props.date.locale("pl").format("dddd - DD.MM")}
+        secondaryHeading={`Tydzień  ${
+          props.date.week() % 2 === 0 ? "Parzysty" : "Nieparzysty"
+        }`}
       />
       <LessonList>
-        <LessonTile
-          alternative
-          start="16:50"
-          end="18:20"
-          name="Spotkanie koła"
-          classroom="125BT"
-        />
-        <LessonTile
-          alternative
-          start="16:50"
-          end="18:20"
-          name="Spotkanie koła"
-          classroom="125BT"
-        />
+        {props.lessons?.map((lesson) => (
+          <LessonTile
+            name={lesson.name}
+            classroom={lesson.classroom}
+            start={lesson.start_hour + ":" + lesson.start_minutes}
+            end={lesson.end_hour + ":" + lesson.end_minutes}
+            alternative
+            key={lesson.id}
+            onClick={() => props.onLessonSelected(lesson)}
+            selected={lesson.id === props.selectedLesson?.id}
+          />
+        ))}
       </LessonList>
       {/* Pusty div potrzebny żeby layout sie nie popsuł */}
       <div />

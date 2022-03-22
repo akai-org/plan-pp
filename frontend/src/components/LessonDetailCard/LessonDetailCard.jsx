@@ -1,11 +1,11 @@
-//Komponent w trakcie tworzenia
-
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
+
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import LessonDetail from "./LessonDetail/LessonDetail";
-import PropTypes from "prop-types";
+import theme from '../../theme';
 
 const Header = styled.div`
   display: flex;
@@ -19,8 +19,10 @@ const StyledCard = styled(Card)`
   justify-content: flex-start;
   text-align: center;
   border-radius: 12px;
-  min-height: 500px;
+  min-height: 450px;
   min-width: 300px;
+  max-width: 380px;
+  box-shadow: ${() => theme.boxShadow.large}
 `;
 
 const LessonName = styled.h3`
@@ -55,26 +57,35 @@ const EditButton = styled(Button)`
   margin-top: auto;
 `;
 
-const LeftCard = (props) => {
+const LessonDetailCard = (props) => {
+  let lessonType = "";
+  switch (props.lesson?.type) {
+    case "lecture": lessonType = "Wykład"; break;
+    case "laboratory": lessonType = "Laboratorium"; break;
+    case "workshop": lessonType = "Ćwiczenia"; break;
+    case "seminar": lessonType = "Seminarium"; break;
+    default: break;
+  }
+
   return (
     <StyledCard className={props.className}>
       <Header>
-        <LessonName>Systemy Operacyjne</LessonName>
-        <TypeIndicator>Wykład</TypeIndicator>
+        <LessonName>{props.lesson?.name}</LessonName>
+        <TypeIndicator>{lessonType}</TypeIndicator>
       </Header>
-      <LessonDetail />
+      <LessonDetail lesson={props.lesson}/>
       <Actions>
         <Button>Przejdź na ekursy</Button>
         <Button>Dołącz do spotkania</Button>
       </Actions>
-      <Notes>Pamiętać o zaznaczeniu obecności!</Notes>
+      <Notes>{props.lesson?.notes || "Brak notatek dla tych zajęć"}</Notes>
       <EditButton>Edytuj</EditButton>
     </StyledCard>
   );
 };
 
-LeftCard.propTypes = {
+LessonDetailCard.propTypes = {
   className: PropTypes.string,
 };
 
-export default LeftCard;
+export default LessonDetailCard;

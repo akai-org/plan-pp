@@ -4,7 +4,7 @@ import styled from "styled-components";
 const GridContainer = styled.div`
   display: grid;
   margin: 30px;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
 `;
 
 const TimeDisplay = styled.span`
@@ -32,23 +32,33 @@ const ThinText = styled.span`
 `;
 
 const LessonDetail = (props) => {
+  const { lesson } = props;
+
   return (
     <>
       <GridContainer>
-        <TimeDisplay>16:50</TimeDisplay>
-        <Classroom>125 BT</Classroom>
-        <TimeDisplay>18:20</TimeDisplay>
+        <TimeDisplay>
+          {("0" + lesson?.start_hour).slice(-2)}:{("0" + lesson?.start_minutes).slice(-2)}
+        </TimeDisplay>
+        <Classroom>{lesson?.classroom}</Classroom>
+        <TimeDisplay>
+          {("0" + lesson?.end_hour).slice(-2)}:{("0" + lesson?.end_minutes).slice(-2)}
+        </TimeDisplay>
         <Capiton>początek</Capiton>
         <Capiton>sala</Capiton>
         <Capiton>koniec</Capiton>
       </GridContainer>
       <OtherInfo>
         <ThinText>prowadzący: </ThinText>
-        Janina Nowak
+        {lesson?.teacher || "Imię Nazwisko"}
       </OtherInfo>
       <OtherInfo>
         <ThinText>tygodnie: </ThinText>
-        nieparzyste
+        {lesson?.parity === "odd"
+          ? "Nieparzyste"
+          : lesson?.parity === "even"
+          ? "Parzyste"
+          : "Wszystkie"}
       </OtherInfo>
     </>
   );

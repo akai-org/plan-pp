@@ -12,6 +12,13 @@ const Tile = styled.div`
   min-height: 70px;
   min-width: 150px;
   position: relative;
+  outline: ${(props) =>
+    props.selected
+      ? "2px solid " + (props.alternativeColor
+        ? props.theme.colors.tile.secondary
+        : props.theme.colors.tile.primary)
+      : "none"};
+  outline-offset: 1px;
 `;
 
 const StartTime = styled.span`
@@ -52,7 +59,12 @@ const Classroom = styled.span`
 
 const LessonTile = (props) => {
   return (
-    <Tile className={props.className} alternativeColor={props.alternative}>
+    <Tile
+      className={props.className}
+      selected={props.selected}
+      alternativeColor={props.alternative}
+      onClick={props.onClick}
+    >
       <Name>{props.name}</Name>
       <StartTime>{props.start}</StartTime>
       <EndTime>{props.end}</EndTime>
