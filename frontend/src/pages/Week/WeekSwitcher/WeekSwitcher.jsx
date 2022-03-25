@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import dayjs from "dayjs";
-import weekOfYear from 'dayjs/plugin/weekOfYear';
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import PropTypes from "prop-types";
 
 import Card from "../../../components/UI/Card";
-
-dayjs.extend(weekOfYear);
 
 const Box = styled(Card)`
   display: grid;
@@ -49,17 +48,16 @@ const ArrowRight = styled(MdKeyboardArrowRight)`
 
 const WeekSwitcher = (props) => {
   const [weekStart, setWeekStart] = useState();
-  const [weekEnd, setWeekEnd] = useState();
   const [parity, setParity] = useState();
 
   useEffect(() => {
-    var monday = new Date();
-    var day = monday.getDay() || 7;
-    if (day !== 1) monday.setHours(-24 * (day - 1));
-    const friday = new Date(monday).setHours(24 * 4);
+    dayjs.extend(weekOfYear);
+    let monday = dayjs();
+    const dayOfWeek = dayjs().day() || 7;
+    monday = monday.subtract(dayOfWeek - 1, "days");
+    const friday = monday.add(4, "days");
     const weekNumber = dayjs(friday).week();
-		setWeekStart(dayjs(monday));
-		setWeekEnd(dayjs(friday));
+    setWeekStart(dayjs(monday));
     setParity(weekNumber % 2 === 0);
   }, []);
 
@@ -67,34 +65,34 @@ const WeekSwitcher = (props) => {
     props.onWeekChanged(weekStart, parity);
   }, [props, weekStart, parity]);
 
-	const handleNextWeek = () => {
-    const newWeekStart = weekStart.add(7, 'day');
-		setWeekStart(newWeekStart);
-		setWeekEnd(weekEnd.add(7, 'day'));
+  const handleNextWeek = () => {
+    const newWeekStart = weekStart.add(7, "day");
+    setWeekStart(newWeekStart);
+  };
 
-    const weekNumber = newWeekStart.week();
-    setParity(weekNumber % 2 === 0);
-	}
-
-	const handlePreviousWeek = () => {
-    const newWeekStart = weekStart.subtract(7, 'day');
-		setWeekStart(newWeekStart);
-		setWeekEnd(weekEnd.subtract(7, 'day'));
-
-    const weekNumber = newWeekStart.week();
-    setParity(weekNumber % 2 === 0);
-	}
+  const handlePreviousWeek = () => {
+    const newWeekStart = weekStart.subtract(7, "day");
+    setWeekStart(newWeekStart);
+  };
 
   return (
-    <Box>
-      <ArrowLeft onClick={handlePreviousWeek}/>
+    <Box className={props.className}>
+      <ArrowLeft onClick={handlePreviousWeek} />
       <DateDisplay>
-        {weekStart?.format("DD.MM")} - {weekEnd?.format("DD.MM")}
+        {weekStart?.format("DD.MM")} -{" "}
+        {weekStart?.add(4, "days").format("DD.MM")}
       </DateDisplay>
-      <ParityIndicator>Tydzień {!parity && 'nie'}parzysty</ParityIndicator>
-      <ArrowRight onClick={handleNextWeek}/>
+      <ParityIndicator>
+        Tydzień {weekStart?.week() % 2 ? "nieparzysty" : "parzysty"}
+      </ParityIndicator>
+      <ArrowRight onClick={handleNextWeek} />
     </Box>
   );
+};
+
+WeekSwitcher.propTypes = {
+  className: PropTypes.string,
+  onWeekChanged: PropTypes.func,
 };
 
 export default WeekSwitcher;

@@ -15,17 +15,16 @@ const Container = styled.div`
 
 const Week = (props) => {
   const [firstDayOfWeek, setFirstDayOfWeek] = useState(undefined);
-  const [weekParity, setWeekParity] = useState(false);
+  const [selectedLesson, setSelectedLesson] = useState(null);
   
   const handleWeekChanged = (firstDay, parity) => {
     setFirstDayOfWeek(firstDay);
-    setWeekParity(parity);
   }
   
   return (
-    <Container>
+    <Container onClick={() => setSelectedLesson(null)}>
       <Heading onWeekChanged={handleWeekChanged}/>
-      <Timetable firstDay={firstDayOfWeek} weekParity={weekParity}/>
+      <Timetable selectedLesson={selectedLesson} onLessonSelected={setSelectedLesson} firstDay={firstDayOfWeek} />
     </Container>
   );
 };

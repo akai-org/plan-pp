@@ -1,7 +1,8 @@
-import React, { useState} from "react";
+import React from "react";
 import styled from "styled-components";
-import DayColumn, { HOUR_HEIGHT_PX } from "./DayColumn/DayColumn";
+import PropTypes from "prop-types";
 
+import DayColumn, { HOUR_HEIGHT_PX } from "./DayColumn/DayColumn";
 import timetable from "./exampleLessons.js";
 
 const Table = styled.div`
@@ -11,6 +12,7 @@ const Table = styled.div`
   gap: 8px;
   padding: 0 16px;
   position: relative;
+  margin: 0 12px;
 `;
 
 const HorizontalRuler = styled.div`
@@ -32,59 +34,36 @@ const HorizontalRuler = styled.div`
   }
 `;
 
-const rulers = [];
-for (let i = 8; i <= 21; i++) {
-  rulers.push(i);
-}
-
 const Timetable = (props) => {
-  const [selectedLesson, setSelectedLesson] = useState(null);
-
   return (
-    <Table onClick={() => setSelectedLesson(null)}>
-      <DayColumn
-        lessons={timetable.monday}
-        date={props.firstDay}
-        onLessonSelected={setSelectedLesson}
-        selectedLesson={selectedLesson}
-        dayOfWeekNumber={1}
-      />
-      <DayColumn
-        lessons={timetable.tuesday}
-        date={props.firstDay?.add(1, "days")}
-        onLessonSelected={setSelectedLesson}
-        selectedLesson={selectedLesson}
-        dayOfWeekNumber={2}
-      />
-      <DayColumn
-        lessons={timetable.wednesday}
-        date={props.firstDay?.add(2, "days")}
-        onLessonSelected={setSelectedLesson}
-        selectedLesson={selectedLesson}
-        dayOfWeekNumber={3}
-      />
-      <DayColumn
-        lessons={timetable.thursday}
-        date={props.firstDay?.add(3, "days")}
-        onLessonSelected={setSelectedLesson}
-        selectedLesson={selectedLesson}
-        dayOfWeekNumber={4}
-      />
-      <DayColumn
-        lessons={timetable.friday}
-        date={props.firstDay?.add(4, "days")}
-        onLessonSelected={setSelectedLesson}
-        selectedLesson={selectedLesson}
-        dayOfWeekNumber={5}
-      />
+    <Table className={props.className}>
+      {Object.values(timetable).map((day, index) => (
+        <DayColumn
+          lessons={day}
+          date={props.firstDay?.add(index, "days")}
+          onLessonSelected={props.onLessonSelected}
+          selectedLesson={props.selectedLesson}
+          dayOfWeekNumber={index + 1}
+          key={index}
+        />
+      ))}
 
-      {rulers.map((i) => (
-        <HorizontalRuler key={i} number={i}>
-          {i}
+      {[...Array(13).keys()].map((i) => (
+        <HorizontalRuler key={i + 8} number={i + 8}>
+          {i + 8}
         </HorizontalRuler>
       ))}
     </Table>
   );
+};
+
+Timetable.propTypes = {
+  firstDay: PropTypes.object,
+  className: PropTypes.string,
+  onLessonSelected: PropTypes.func,
+  lessonSelected: PropTypes.shape({
+    id: PropTypes.string,
+  }),
 };
 
 export default Timetable;

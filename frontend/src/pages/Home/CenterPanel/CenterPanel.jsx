@@ -41,17 +41,16 @@ const MainCard = (props) => {
         }`}
       />
       <LessonList>
-        {props.lessons?.map(lesson => (
+        {props.lessons?.map((lesson) => (
           <LessonTile
-            name={lesson.name}
-            classroom={lesson.classroom}
-            start={("0" + lesson.start_hour).slice(-2) + ":" + ("0" + lesson.start_minutes).slice(-2)}
-            end={("0" + lesson.end_hour).slice(-2) + ":" + ("0" + lesson.end_minutes).slice(-2)}
+            lesson={lesson}
             key={lesson.id}
             onClick={() => props.onLessonSelected(lesson)}
             selected={lesson.id === props.selectedLesson?.id}
           />
         ))}
+        {(props.lessons === undefined || props.lessons.length === 0) && (
+          <h1>Brak zajęć na ten dzień</h1>)}
       </LessonList>
       <StyledButton onClick={() => navigate("/week")}>
         Zobacz pełny plan na tydzień

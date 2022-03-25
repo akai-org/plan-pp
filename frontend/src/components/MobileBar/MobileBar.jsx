@@ -14,7 +14,7 @@ import LoginPopup from "./LoginPopup/LoginPopup";
 import theme from "../../theme";
 import AccountIndicator from "../Topbar/AccountIndicator/AccountIndicator";
 import DropdownMenu from "../UI/DropdownMenu/DropdownMenu";
-import DropdownMenuItem from "../UI/DropdownMenu/DropdownMenuItem/DropdownMenuitem";
+import DropdownMenuItem from "../UI/DropdownMenu/DropdownMenuItem/DropdownMenuItem";
 import Overlay from "../UI/Modal/Overlay/Overlay";
 
 const Bar = styled.div`
@@ -51,41 +51,41 @@ const MobileBar = (props) => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const bar = (
+    <Bar className={props.className}>
+      <MenuIcon onClick={() => setMenuOpen(!menuOpen)} />
+      <Menu open={menuOpen} onClick={() => setMenuOpen(false)}>
+        <MenuItem
+          label="Widok tygodnia"
+          icon={iconCalendar}
+          onClick={() => navigate("/week")}
+          noBorder
+        />
+        <MenuItem
+          label="Agenda"
+          icon={iconAgenda}
+          onClick={() => navigate("/")}
+          noBorder
+        />
+        <MenuItem
+          label="Ustawienia konta"
+          icon={iconAccount}
+          onClick={() => navigate("/settings")}
+        />
+        <MenuItem
+          label="Wyloguj"
+          icon={iconLogout}
+          onClick={props.onLogout}
+          noBorder
+        />
+      </Menu>
+      <AccountIndicator includeMenu={false} />
+    </Bar>
+  );
+
   return (
     <>
-      {props.loggedIn ? (
-        <Bar className={props.className}>
-          <MenuIcon onClick={() => setMenuOpen(!menuOpen)} />
-          <Menu open={menuOpen} onClick={() => setMenuOpen(false)}>
-            <MenuItem
-              label="Widok tygodnia"
-              icon={iconCalendar}
-              onClick={() => navigate("/week")}
-              noBorder
-            />
-            <MenuItem
-              label="Agenda"
-              icon={iconAgenda}
-              onClick={() => navigate("/")}
-              noBorder
-            />
-            <MenuItem
-              label="Ustawienia konta"
-              icon={iconAccount}
-              onClick={() => navigate("/settings")}
-            />
-            <MenuItem
-              label="Wyloguj"
-              icon={iconLogout}
-              onClick={props.onLogout}
-              noBorder
-            />
-          </Menu>
-          <AccountIndicator includeMenu={false} />
-        </Bar>
-      ) : (
-        <LoginPopup onLoginClick={props.onLoginClick} />
-      )}
+      {props.loggedIn ? bar : <LoginPopup onLoginClick={props.onLoginClick} />}
       {menuOpen && <Overlay onClick={() => setMenuOpen(false)} />}
     </>
   );
@@ -94,6 +94,8 @@ const MobileBar = (props) => {
 MobileBar.propTypes = {
   loggedIn: PropTypes.bool,
   onLoginClick: PropTypes.func,
+  className: PropTypes.string,
+  onLogoue: PropTypes.string,
 };
 
 export default MobileBar;

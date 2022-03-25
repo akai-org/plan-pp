@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
-import DropdownMenu from "../../UI/DropdownMenu/DropdownMenu";
-import DropdownMenuItem from "../../UI/DropdownMenu/DropdownMenuItem/DropdownMenuitem";
 import {
   MdKeyboardArrowDown as iconDown,
   MdAccountBox as iconAccount,
@@ -11,6 +9,9 @@ import {
   MdViewAgenda as iconAgenda,
 } from "react-icons/md";
 import PropTypes from "prop-types";
+
+import DropdownMenu from "../../UI/DropdownMenu/DropdownMenu";
+import DropdownMenuItem from "../../UI/DropdownMenu/DropdownMenuItem/DropdownMenuItem";
 
 const Wrapper = styled.div`
   display: grid;

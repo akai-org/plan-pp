@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
 const GridContainer = styled.div`
   display: grid;
@@ -38,11 +39,13 @@ const LessonDetail = (props) => {
     <>
       <GridContainer>
         <TimeDisplay>
-          {("0" + lesson?.start_hour).slice(-2)}:{("0" + lesson?.start_minutes).slice(-2)}
+          {("0" + lesson?.startHours).slice(-2)}:
+          {("0" + lesson?.startMinutes).slice(-2)}
         </TimeDisplay>
         <Classroom>{lesson?.classroom}</Classroom>
         <TimeDisplay>
-          {("0" + lesson?.end_hour).slice(-2)}:{("0" + lesson?.end_minutes).slice(-2)}
+          {("0" + lesson?.endHours).slice(-2)}:
+          {("0" + lesson?.endMinutes).slice(-2)}
         </TimeDisplay>
         <Capiton>początek</Capiton>
         <Capiton>sala</Capiton>
@@ -63,5 +66,17 @@ const LessonDetail = (props) => {
     </>
   );
 };
+
+LessonDetail.propTypes = {
+  lesson: PropTypes.shape({
+    startHours: PropTypes.number,
+    startMinutes: PropTypes.number,
+    endHours: PropTypes.number,
+    endMinutes: PropTypes.number,
+    teacher: PropTypes.string,
+    parity: PropTypes.oneOf(['odd', 'even']),
+    classroom: PropTypes.string
+  })
+}
 
 export default LessonDetail;

@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../../resources/AKAI-LOGO.png";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { useMediaPredicate } from "react-media-hook";
@@ -7,6 +6,7 @@ import { useMediaPredicate } from "react-media-hook";
 import Clock from "./Clock/Clock";
 import AccountIndicator from "./AccountIndicator/AccountIndicator";
 import Button from "../UI/Button";
+import logo from "../../resources/AKAI-LOGO.png";
 
 const LogoImg = styled.img`
   height: 100%;

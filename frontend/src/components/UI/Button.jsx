@@ -53,7 +53,7 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-  // variant: PropTypes.oneOf(["normal", "link"]),
+  variant: PropTypes.oneOf(["normal", "link", "transparent"]),
   children: PropTypes.node,
   onClick: PropTypes.func,
   className: PropTypes.string,

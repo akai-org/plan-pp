@@ -3,6 +3,8 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import "dayjs/locale/pl";
 
+import PropTypes from 'prop-types';
+
 const ClockWrapper = styled.span`
   text-align: center;
 `;
@@ -39,5 +41,9 @@ const Clock = (props) => {
     </ClockWrapper>
   );
 };
+
+Clock.propTypes = {
+  className: PropTypes.string,
+}
 
 export default Clock;

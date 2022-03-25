@@ -34,16 +34,16 @@ const RightPanel = (props) => {
       <LessonList>
         {props.lessons?.map((lesson) => (
           <LessonTile
-            name={lesson.name}
-            classroom={lesson.classroom}
-            start={lesson.start_hour + ":" + lesson.start_minutes}
-            end={lesson.end_hour + ":" + lesson.end_minutes}
+            lesson={lesson}
             alternative
             key={lesson.id}
             onClick={() => props.onLessonSelected(lesson)}
             selected={lesson.id === props.selectedLesson?.id}
           />
         ))}
+        {(props.lessons === undefined || props.lessons.length === 0) && (
+          <h1>Brak zajęć na ten dzień</h1>
+        )}
       </LessonList>
       {/* Pusty div potrzebny żeby layout sie nie popsuł */}
       <div />

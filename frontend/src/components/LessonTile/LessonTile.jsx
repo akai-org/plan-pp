@@ -14,9 +14,10 @@ const Tile = styled.div`
   position: relative;
   outline: ${(props) =>
     props.selected
-      ? "2px solid " + (props.alternativeColor
-        ? props.theme.colors.tile.secondary
-        : props.theme.colors.tile.primary)
+      ? "2px solid " +
+        (props.alternativeColor
+          ? props.theme.colors.tile.secondary
+          : props.theme.colors.tile.primary)
       : "none"};
   outline-offset: 1px;
 `;
@@ -24,7 +25,7 @@ const Tile = styled.div`
 const StartTime = styled.span`
   font-weight: 700;
   position: absolute;
-  top: 8px;
+  top: 4px;
   left: 10px;
   color: ${(props) => props.theme.colors.text.secondaryWhite};
   font-size: 0.75rem;
@@ -33,7 +34,7 @@ const StartTime = styled.span`
 const EndTime = styled.span`
   font-weight: 700;
   position: absolute;
-  bottom: 8px;
+  bottom: 4px;
   left: 10px;
   color: ${(props) => props.theme.colors.text.secondaryWhite};
   font-size: 0.75rem;
@@ -41,6 +42,7 @@ const EndTime = styled.span`
 
 const Name = styled.span`
   font-weight: 500;
+  line-height: 95%;
   position: absolute;
   top: 50%;
   transform: translateY(-55%);
@@ -51,7 +53,7 @@ const Name = styled.span`
 const Classroom = styled.span`
   font-weight: 700;
   position: absolute;
-  bottom: 8px;
+  bottom: 4px;
   right: 10px;
   color: ${(props) => props.theme.colors.text.secondaryWhite};
   font-size: 0.75rem;
@@ -65,10 +67,18 @@ const LessonTile = (props) => {
       alternativeColor={props.alternative}
       onClick={props.onClick}
     >
-      <Name>{props.name}</Name>
-      <StartTime>{props.start}</StartTime>
-      <EndTime>{props.end}</EndTime>
-      <Classroom>{props.classroom}</Classroom>
+      <Name>{props.lesson?.name}</Name>
+      <StartTime>
+        {("0" + props.lesson?.startHours).slice(-2) +
+          ":" +
+          ("0" + props.lesson?.startMinutes).slice(-2)}
+      </StartTime>
+      <EndTime>
+        {("0" + props.lesson?.endHours).slice(-2) +
+          ":" +
+          ("0" + props.lesson?.endMinutes).slice(-2)}
+      </EndTime>
+      <Classroom>{props.lesson?.classroom}</Classroom>
     </Tile>
   );
 };
@@ -76,9 +86,13 @@ const LessonTile = (props) => {
 LessonTile.propTypes = {
   alternative: PropTypes.bool,
   name: PropTypes.string,
-  start: PropTypes.string,
-  end: PropTypes.string,
   classroom: PropTypes.string,
+  startMinutes: PropTypes.number,
+  startHours: PropTypes.number,
+  endMinutes: PropTypes.number,
+  endHours: PropTypes.number,
+  onClick: PropTypes.func,
+  selected: PropTypes.bool,
 };
 
 export default LessonTile;

@@ -86,6 +86,17 @@ const LessonDetailCard = (props) => {
 
 LessonDetailCard.propTypes = {
   className: PropTypes.string,
+  lesson: PropTypes.shape({
+    name: PropTypes.string,
+    startHours: PropTypes.number,
+    startMinutes: PropTypes.number,
+    endHours: PropTypes.number,
+    endMinutes: PropTypes.number,
+    teacher: PropTypes.string,
+    parity: PropTypes.oneOf(['odd', 'even']),
+    classroom: PropTypes.string,
+    notes: PropTypes.string,
+  })
 };
 
 export default LessonDetailCard;

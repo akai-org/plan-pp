@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import Button from "../../UI/Button";
 import theme from "../../../theme";
@@ -45,7 +45,7 @@ const LoginPopup = (props) => {
 
 LoginPopup.propTypes = {
   className: PropTypes.string,
-  onLoginClick: PropTypes.func
+  onLoginClick: PropTypes.func,
 };
 
 export default LoginPopup;

@@ -18,7 +18,8 @@ const PrimaryHeading = styled.span`
   font-weight: 300;
   font-size: 1.25rem;
   margin-bottom: 0.5em;
-  text-transform: capitalize;;
+  text-transform: capitalize;
+  padding: 2px;
 `;
 
 const SecondaryHeading = styled.div`

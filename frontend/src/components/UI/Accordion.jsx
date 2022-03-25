@@ -38,6 +38,7 @@ Accordion.propTypes = {
   onClick: PropTypes.func,
   expanded: PropTypes.bool,
   children: PropTypes.node,
+  label: PropTypes.string,
 };
 
 export default Accordion;
