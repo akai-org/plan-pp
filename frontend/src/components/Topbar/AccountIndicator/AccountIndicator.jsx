@@ -39,7 +39,7 @@ const IconDown = styled(iconDown)`
   grid-column: 2/3;
   grid-row: 1/3;
   justify-self: center;
-  transform: scale(1.75);
+  font-size: 1.5em;
   cursor: pointer;
 `;
 
