@@ -12,6 +12,7 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   min-height: 100vh;
+  z-index: 30;
 `;
 
 const IconBack = styled(MdArrowBack)`
@@ -25,7 +26,7 @@ const LogoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 8px;
 `;
 
 const LogoImg = styled.img`
@@ -34,7 +35,8 @@ const LogoImg = styled.img`
 
 const LogoTitle = styled.span`
   font-family: "Roboto Slab";
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+  font-weight: 300;
 `;
 
 const MobileOverlay = (props) => {
@@ -43,7 +45,7 @@ const MobileOverlay = (props) => {
     return () => document.body.style.overflow = "unset";
   }, []);
   return (
-    <Overlay className={props.className}>
+    <Overlay className={props.className} onClick={e => e.stopPropagation()}>
       <IconBack onClick={props.onClick} />
       <LogoWrapper>
         <LogoImg src={logo} />

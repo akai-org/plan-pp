@@ -26,7 +26,7 @@ const Bar = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  z-index: 200;
+  z-index: 20;
   background-color: white;
   box-shadow: ${theme.boxShadow.large};
 `;

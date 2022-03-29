@@ -63,6 +63,7 @@ const DayColumn = (props) => {
           onLessonSelected={props.onLessonSelected}
           selectedLesson={props.selectedLesson}
           useShorthandNames={underMediumSize}
+          date={props.date}
       />
       {popup}
     </Column>

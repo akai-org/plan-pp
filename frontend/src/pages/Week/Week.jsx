@@ -26,7 +26,7 @@ const Container = styled.div`
   align-items: center;
   overflow: hidden;
 
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     margin-bottom: 75px;
     margin-top: 8px;
     gap: 8px;
@@ -45,22 +45,38 @@ const OverflowContainer = styled.div`
 `;
 
 const LessonDetailWindow = styled(LessonDetailCard)`
-  position: fixed;
-  padding: 0 1em;
   background: transparent;
-  top: 150px;
-  left: 50%;
-  transform: translate(-50%, 0);
   z-index: 10;
   width: 90%;
   box-shadow: none;
+  margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const LessonDetailPopup = styled(LessonDetailCard)`
+  position: fixed;
+  top: ${(props) => Math.min(props.lesson.startHours * 50, 700)}px;
+  transform: translate(15vw, -50%);
 `;
 
 const Week = (props) => {
   const underMediumSize = useMediaPredicate("(max-width: 900px)");
+  const underSmallSize = useMediaPredicate("(max-width: 600px)");
   const [firstDayOfWeek, setFirstDayOfWeek] = useState();
   const [day, setDay] = useState(dayjs());
   const [selectedLesson, setSelectedLesson] = useState(null);
+
+  const LessonDetailMobile = selectedLesson && (
+    <MobileOverlay onClick={() => setSelectedLesson(null)}>
+      <LessonDetailWindow lesson={selectedLesson} />
+    </MobileOverlay>
+  );
+  const LessonDetailTablet = selectedLesson && (
+    <LessonDetailPopup lesson={selectedLesson} />
+  );
 
   return (
     <Container onClick={() => setSelectedLesson(null)}>
@@ -86,13 +102,7 @@ const Week = (props) => {
             lessons={exampleLessons[Object.keys(exampleLessons)[day.day()]]}
             date={day.add(1, "day")}
           />
-
-          {selectedLesson && (
-            <>
-              <MobileOverlay onClick={e => e.stopPropagation()}/>
-              <LessonDetailWindow lesson={selectedLesson} />
-            </>
-          )}
+          {underSmallSize ? LessonDetailMobile : LessonDetailTablet}
         </OverflowContainer>
       ) : (
         <Timetable
