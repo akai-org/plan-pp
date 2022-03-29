@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import dayjs from 'dayjs';
 import "dayjs/locale/pl";
 import PropTypes from "prop-types";
+import { useMediaPredicate } from 'react-media-hook';
 
-import LessonTile from "../../../../components/LessonTile/LessonTile";
 import LessonDetailCard from "../../../../components/LessonDetailCard/LessonDetailCard";
+import LessonStack from '../../LessonStack/LessonStack';
+
+dayjs.locale("pl");
 
 export const HOUR_HEIGHT_PX = 50;
 
@@ -19,19 +23,6 @@ const Header = styled.div`
   text-transform: capitalize;
 `;
 
-const Schedule = styled.div`
-  min-height: ${(props) => 13 * HOUR_HEIGHT_PX}px;
-  position: relative;
-`;
-
-const PositionedTile = styled(LessonTile)`
-  position: absolute;
-  top: ${(props) => props.startOffset}px;
-  height: ${(props) => props.height}px;
-  left: 0;
-  right: 0;
-`;
-
 const LessonDetailPopup = styled(LessonDetailCard)`
   position: absolute;
   z-index: 10;
@@ -43,15 +34,9 @@ const LessonDetailPopup = styled(LessonDetailCard)`
   width: 360px;
 `;
 
-const matchingWeek = (lesson, weekParity) => {
-  if (lesson.parity === "odd" && weekParity) return false;
-  if (lesson.parity === "even" && !weekParity) return false;
-
-  return true;
-};
-
 const DayColumn = (props) => {
-  const weekEven = props.date?.week() % 2 === 0 || false;
+  const underMediumSize = useMediaPredicate('(max-width: 1200px)');
+
   const lessonInsidePopup = props.lessons?.find(
     (lesson) => lesson.id === props.selectedLesson?.id
   );
@@ -70,34 +55,15 @@ const DayColumn = (props) => {
     />
   );
 
-  const lessonTiles = props.lessons?.map(
-    (lesson) =>
-      matchingWeek(lesson, weekEven) && (
-        <PositionedTile
-          startOffset={
-            (lesson.startHours - 8 + lesson.startMinutes / 60) * HOUR_HEIGHT_PX
-          }
-          height={
-            (lesson.endHours -
-              lesson.startHours +
-              (lesson.endMinutes - lesson.startMinutes) / 60) *
-            HOUR_HEIGHT_PX
-          }
-          lesson={lesson}
-          key={lesson.id}
-          onClick={(e) => {
-            e.stopPropagation();
-            props.onLessonSelected(lesson);
-          }}
-          selected={props.selectedLesson?.id === lesson.id}
-        />
-      )
-  );
 
   return (
     <Column className={props.className}>
-      <Header>{props.date?.locale("pl").format("dddd - DD.MM")}</Header>
-      <Schedule>{lessonTiles}</Schedule>
+      <Header>{props.date?.format("dddd - DD.MM")}</Header>
+      <LessonStack lessons={props.lessons}
+          onLessonSelected={props.onLessonSelected}
+          selectedLesson={props.selectedLesson}
+          useShorthandNames={underMediumSize}
+      />
       {popup}
     </Column>
   );

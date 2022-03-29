@@ -2,12 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import "dayjs/locale/pl";
+import dayjs from 'dayjs';
 
 import Card from "../../../components/UI/Card";
 import Button from "../../../components/UI/Button";
 import LessonTile from "../../../components/LessonTile/LessonTile";
 import PanelHeader from "../PanelHeader/PanelHeader";
 import LessonList from "../LessonList/LessonList";
+
+dayjs.locale("pl");
 
 const StyledCard = styled(Card)`
   display: inline-flex;
@@ -35,9 +38,9 @@ const MainCard = (props) => {
     <StyledCard className={props.className}>
       <PanelHeader
         title="Dzisiaj"
-        primaryHeading={props.date.locale("pl").format("dddd - DD.MM")}
+        primaryHeading={props.date?.format("dddd - DD.MM")}
         secondaryHeading={`Tydzień  ${
-          props.date.week() % 2 === 0 ? "Parzysty" : "Nieparzysty"
+          props.date?.week?.() % 2 === 0 ? "Parzysty" : "Nieparzysty"
         }`}
       />
       <LessonList>

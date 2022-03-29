@@ -16,7 +16,7 @@ const Box = styled(Card)`
   max-width: 500px;
   gap: 4px;
   padding: 8px 12px;
-  width: 100%;
+  min-width: 300px;
 `;
 
 const DateDisplay = styled.h5`
@@ -48,22 +48,18 @@ const ArrowRight = styled(MdKeyboardArrowRight)`
 
 const WeekSwitcher = (props) => {
   const [weekStart, setWeekStart] = useState();
-  const [parity, setParity] = useState();
 
   useEffect(() => {
     dayjs.extend(weekOfYear);
     let monday = dayjs();
     const dayOfWeek = dayjs().day() || 7;
     monday = monday.subtract(dayOfWeek - 1, "days");
-    const friday = monday.add(4, "days");
-    const weekNumber = dayjs(friday).week();
     setWeekStart(dayjs(monday));
-    setParity(weekNumber % 2 === 0);
   }, []);
 
   useEffect(() => {
-    props.onWeekChanged(weekStart, parity);
-  }, [props, weekStart, parity]);
+    props.onWeekChanged(weekStart);
+  }, [props, weekStart]);
 
   const handleNextWeek = () => {
     const newWeekStart = weekStart.add(7, "day");

@@ -24,6 +24,10 @@ const Container = styled.div`
     margin-top: 0;
     padding: 20px;
   }
+
+  @media screen and (max-width: 600px){
+    margin-bottom: 70px;
+  }
 `;
 
 const LeftPanel = styled(LessonDetailCard)`
@@ -43,7 +47,12 @@ const Home = (props) => {
   const lessonsTomorrow =
     exampleLessons[Object.keys(exampleLessons)[today.day() % 7]];
 
-  const [selectedLesson, setSelectedLesson] = useState(lessonsToday[0]);
+  const [selectedLesson, setSelectedLesson] = useState(lessonsToday?.[0]);
+
+  const handleLessonSelected = lesson => {
+    setSelectedLesson(lesson);
+    window.scrollTo({top: 0, behavior: 'smooth'})
+  }
   return (
     <>
       <Container>
@@ -51,13 +60,13 @@ const Home = (props) => {
         <CenterPanel
           date={today}
           lessons={lessonsToday}
-          onLessonSelected={setSelectedLesson}
+          onLessonSelected={handleLessonSelected}
           selectedLesson={selectedLesson}
         />
         <RightPanel
           date={today.add(1, "day")}
           lessons={lessonsTomorrow}
-          onLessonSelected={setSelectedLesson}
+          onLessonSelected={handleLessonSelected}
           selectedLesson={selectedLesson}
         />
       </Container>

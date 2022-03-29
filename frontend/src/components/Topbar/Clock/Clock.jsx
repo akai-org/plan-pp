@@ -5,6 +5,8 @@ import "dayjs/locale/pl";
 
 import PropTypes from 'prop-types';
 
+dayjs.locale("pl");
+
 const ClockWrapper = styled.span`
   text-align: center;
 `;
@@ -36,8 +38,8 @@ const Clock = (props) => {
 
   return (
     <ClockWrapper className={props.className}>
-      <TimeDisplay>{time.locale("pl").format("HH:mm")}</TimeDisplay>
-      <DateDisplay>{time.locale("pl").format("D MMMM")}</DateDisplay>
+      <TimeDisplay>{time.format("HH:mm")}</TimeDisplay>
+      <DateDisplay>{time.format("D MMMM")}</DateDisplay>
     </ClockWrapper>
   );
 };

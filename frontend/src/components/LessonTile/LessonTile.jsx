@@ -10,7 +10,6 @@ const Tile = styled.div`
   border-radius: 4px;
   margin: 4px;
   min-height: 70px;
-  min-width: 150px;
   position: relative;
   outline: ${(props) =>
     props.selected
@@ -59,6 +58,17 @@ const Classroom = styled.span`
   font-size: 0.75rem;
 `;
 
+const getShortName = name => {
+  if (name === undefined)
+    return undefined;
+
+  if (name.length < 20) {
+    return name;
+  }
+  const words = name.toUpperCase().split(" ");
+  return words.map(word => word.slice(0, 1)).join("");
+}
+
 const LessonTile = (props) => {
   return (
     <Tile
@@ -67,7 +77,7 @@ const LessonTile = (props) => {
       alternativeColor={props.alternative}
       onClick={props.onClick}
     >
-      <Name>{props.lesson?.name}</Name>
+      <Name>{ props.useShorthand ? getShortName(props.lesson?.name): props.lesson?.name}</Name>
       <StartTime>
         {("0" + props.lesson?.startHours).slice(-2) +
           ":" +
@@ -84,15 +94,17 @@ const LessonTile = (props) => {
 };
 
 LessonTile.propTypes = {
+  lesson: PropTypes.shape({
+    startHours: PropTypes.number,
+    startMinutes: PropTypes.number,
+    endHours: PropTypes.number,
+    endMinutes: PropTypes.number,
+    classroom: PropTypes.string
+  }),
   alternative: PropTypes.bool,
-  name: PropTypes.string,
-  classroom: PropTypes.string,
-  startMinutes: PropTypes.number,
-  startHours: PropTypes.number,
-  endMinutes: PropTypes.number,
-  endHours: PropTypes.number,
   onClick: PropTypes.func,
   selected: PropTypes.bool,
+  useShorthand: PropTypes.bool
 };
 
 export default LessonTile;

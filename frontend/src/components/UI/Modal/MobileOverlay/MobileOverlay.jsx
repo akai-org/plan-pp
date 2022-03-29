@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import { MdArrowBack } from "react-icons/md";
 import PropTypes from "prop-types";
@@ -9,9 +9,9 @@ const Overlay = styled.div`
   background-color: white;
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
+  min-height: 100vh;
 `;
 
 const IconBack = styled(MdArrowBack)`
@@ -38,13 +38,18 @@ const LogoTitle = styled.span`
 `;
 
 const MobileOverlay = (props) => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => document.body.style.overflow = "unset";
+  }, []);
   return (
-    <Overlay>
+    <Overlay className={props.className}>
       <IconBack onClick={props.onClick} />
       <LogoWrapper>
         <LogoImg src={logo} />
         <LogoTitle>AKAI Plan Zajęć</LogoTitle>
       </LogoWrapper>
+      {props.children}
     </Overlay>
   );
 };

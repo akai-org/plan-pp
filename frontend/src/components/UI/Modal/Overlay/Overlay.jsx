@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
@@ -13,6 +13,10 @@ const StyledOverlay = styled.div`
 `;
 
 const Overlay = (props) => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => document.body.style.overflow = "unset";
+  }, []);
   return <StyledOverlay {...props} />;
 };
 

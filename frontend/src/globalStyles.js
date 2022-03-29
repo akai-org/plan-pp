@@ -12,6 +12,7 @@ export default createGlobalStyle`
 
 	body {
 		background: #F8F8F8;
+		overflow-y: visible;
 	}
 
 	a {

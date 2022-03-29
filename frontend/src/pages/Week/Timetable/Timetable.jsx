@@ -9,10 +9,12 @@ const Table = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: 100%;
-  gap: 8px;
-  padding: 0 16px;
+  padding-left: 16px;
   position: relative;
-  margin: 0 12px;
+
+  @media screen and (max-width: 900px){
+    display: none;
+  }
 `;
 
 const HorizontalRuler = styled.div`

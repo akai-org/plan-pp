@@ -19,7 +19,7 @@ const Title = styled.span`
   font-weight: 300;
 
   @media screen and (max-width: 600px) {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
   }
 `;
 

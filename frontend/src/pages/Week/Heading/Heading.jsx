@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "../../../components/UI/Button";
-import theme from "../../../theme";
 import {
   MdViewAgenda as IconAgenda,
   MdAdd as IconPlus,
@@ -11,14 +9,16 @@ import {
 import { useNavigate  } from "react-router";
 
 import WeekSwitcher from "../WeekSwitcher/WeekSwitcher";
+import Button from "../../../components/UI/Button";
+import theme from "../../../theme";
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
   margin: auto;
-  min-width: 1024px;
+  width: 100%;
+  padding: 0 1em;
 `;
 
 const FloatingButtonGroup = styled.div`
