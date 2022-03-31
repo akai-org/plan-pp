@@ -18,7 +18,10 @@ const theme = {
     },
     button: {
       background: "#F0F0F0",
+      backgroundHover: "#E4E4E4",
+      backgroundActive: "#D8D8D8",
       border: "#CCCCCC",
+      borderActive: "#BBBBBB",
     },
     overlay: {
       background: "#00000040",

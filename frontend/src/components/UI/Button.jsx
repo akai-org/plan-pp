@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import theme from "../../theme";
 
-const buttonHoverTransistion = 'background-color 0.25s, box-shadow 0.25s';
+const buttonStateTransistion = 'background-color 0.25s, box-shadow 0.25s, border-color 0.25s';
 const transparentButtonHoverBgColor = 'rgba(0, 0, 0, 0.08)';
 const transparentButtonActiveBgColor = 'rgba(0, 0, 0, 0.15)';
 const transparentButtonActiveBoxShadow = '0 -1px 2px 0 rgb(0 0 0 / 15%) inset';
@@ -14,9 +14,26 @@ const NormalButton = styled.button`
   background-color: ${(props) => props.theme.colors.button.background};
   border: 2px solid ${(props) => props.theme.colors.button.border};
   cursor: pointer;
+  transition: ${buttonStateTransistion};
+
   @media screen and (max-width: 600px) {
     padding: 8px 12px;
     border-radius: 12px;
+  }
+
+  &:not(:disabled){
+    &:hover {
+      background-color: ${(props) => props.theme.colors.button.backgroundHover};
+    }
+    &:active {
+      background-color: ${(props) => props.theme.colors.button.backgroundActive};
+      border-color: ${(props) => props.theme.colors.button.borderActive};
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
   }
 `;
 
@@ -37,7 +54,7 @@ const TransparentButton = styled.button`
   border: none;
   align-items: center;
   padding: 4px 8px;
-  transition: ${buttonHoverTransistion};
+  transition: ${buttonStateTransistion};
 
   &:not(:disabled){
     &:hover {
@@ -62,7 +79,7 @@ const IconButton = styled(TransparentButton)`
   height: 1em;
   padding: 4px;
   border-radius: 50%;
-  transition: ${buttonHoverTransistion};
+  transition: ${buttonStateTransistion};
 `;
 
 const Button = (props) => {
