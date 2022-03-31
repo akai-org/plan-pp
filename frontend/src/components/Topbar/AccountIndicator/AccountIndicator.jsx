@@ -12,14 +12,14 @@ import PropTypes from "prop-types";
 
 import DropdownMenu from "../../UI/DropdownMenu/DropdownMenu";
 import DropdownMenuItem from "../../UI/DropdownMenu/DropdownMenuItem/DropdownMenuItem";
+import Button from '../../UI/Button';
 
 const Wrapper = styled.div`
   display: grid;
-  position: relative;
   grid-template-columns: auto-fill;
   align-items: center;
   text-align: right;
-  column-gap: 10px;
+  column-gap: 4px;
 `;
 
 const UserName = styled.span`
@@ -35,12 +35,11 @@ const UserInfo = styled.span`
   font-size: 0.9rem;
 `;
 
-const IconDown = styled(iconDown)`
-  grid-column: 2/3;
+const IconDownButton = styled(Button)`
+  grid-column: 2;
   grid-row: 1/3;
   justify-self: center;
   font-size: 1.5em;
-  cursor: pointer;
 `;
 
 const Menu = styled(DropdownMenu)`
@@ -63,7 +62,7 @@ const AccountIndicator = (props) => {
       </UserInfo>
       {props.includeMenu && (
         <>
-          <IconDown onClick={() => setMenuOpen(!menuOpen)} />
+          <IconDownButton variant="icon" icon={iconDown} onClick={() => setMenuOpen(!menuOpen)} />
           <Menu open={menuOpen} onClick={() => setMenuOpen(false)}>
             <DropdownMenuItem
               label="Ustawienia konta"

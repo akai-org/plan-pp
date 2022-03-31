@@ -3,6 +3,11 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import theme from "../../theme";
 
+const buttonHoverTransistion = 'background-color 0.25s, box-shadow 0.25s';
+const transparentButtonHoverBgColor = 'rgba(0, 0, 0, 0.08)';
+const transparentButtonActiveBgColor = 'rgba(0, 0, 0, 0.15)';
+const transparentButtonActiveBoxShadow = '0 -1px 2px 0 rgb(0 0 0 / 15%) inset';
+
 const NormalButton = styled.button`
   padding: 1px 8px;
   border-radius: 4px;
@@ -24,21 +29,40 @@ const LinkButton = styled.button`
 `;
 
 const TransparentButton = styled.button`
+  cursor: pointer;
   background: transparent;
   display: inline-flex;
+  gap: 4px;
   color: ${(props) => theme.colors.text.primary};
   border: none;
   align-items: center;
   padding: 4px 8px;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  &:disabled {
-    color: gray;
+  transition: ${buttonHoverTransistion};
+
+  &:not(:disabled){
     &:hover {
-      background-color: transparent;
+      background-color: ${transparentButtonHoverBgColor};
+    }
+    &:active {
+      background-color: ${transparentButtonActiveBgColor};
+      box-shadow: ${transparentButtonActiveBoxShadow};
     }
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+`;
+
+const IconButton = styled(TransparentButton)`
+  box-sizing: content-box;
+  line-height: 1;
+  width: 1em;
+  height: 1em;
+  padding: 4px;
+  border-radius: 50%;
+  transition: ${buttonHoverTransistion};
 `;
 
 const Button = (props) => {
@@ -47,13 +71,15 @@ const Button = (props) => {
       return <LinkButton {...props}>{props.children}</LinkButton>;
     case "transparent":
       return <TransparentButton {...props}>{props.children}</TransparentButton>;
+    case "icon":
+      return <IconButton {...props}><props.icon /></IconButton>
     default:
       return <NormalButton {...props}>{props.children}</NormalButton>;
   }
 };
 
 Button.propTypes = {
-  variant: PropTypes.oneOf(["normal", "link", "transparent"]),
+  variant: PropTypes.oneOf(["normal", "link", "transparent", "icon"]),
   children: PropTypes.node,
   onClick: PropTypes.func,
   className: PropTypes.string,
