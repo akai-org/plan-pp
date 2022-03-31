@@ -1,49 +1,48 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import {
+  MdKeyboardArrowLeft as iconLeft,
+  MdKeyboardArrowRight as iconRight
+} from "react-icons/md";
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import PropTypes from "prop-types";
 
 import Card from "../../../components/UI/Card";
+import Button from '../../../components/UI/Button';
 
 const Box = styled(Card)`
   display: grid;
-  grid-template-columns: 1em 1fr 1em;
+  grid-template-columns: auto 1fr auto;
   grid-template-rows: 2fr;
+  grid-template-areas: 'left date right' 'left parity right';
   align-items: center;
   text-align: center;
   max-width: 500px;
-  gap: 4px;
-  padding: 8px 12px;
+  gap: 4px 12px;
+  padding: 8px;
   min-width: 300px;
 `;
 
 const DateDisplay = styled.h5`
-  grid-column: 2/3;
-  grid-row: 1/2;
+  grid-area: date;
   font-size: 1.5rem;
 `;
 
 const ParityIndicator = styled.span`
-  grid-column: 2/3;
-  grid-row: 2/3;
+  grid-area: parity;
   text-transform: uppercase;
   font-weight: 300;
 `;
 
-const ArrowLeft = styled(MdKeyboardArrowLeft)`
-  transform: scale(1.5);
-  grid-column: 1/2;
-  grid-row: 1/3;
-  cursor: pointer;
+const ArrowLeft = styled(Button)`
+  font-size: 1.5em;
+  grid-area: left;
 `;
 
-const ArrowRight = styled(MdKeyboardArrowRight)`
-  transform: scale(1.5);
-  grid-column: 3/4;
-  grid-row: 1/3;
-  cursor: pointer;
+const ArrowRight = styled(Button)`
+  font-size: 1.5em;
+  grid-area: right;
 `;
 
 const WeekSwitcher = (props) => {
@@ -73,7 +72,7 @@ const WeekSwitcher = (props) => {
 
   return (
     <Box className={props.className}>
-      <ArrowLeft onClick={handlePreviousWeek} />
+      <ArrowLeft variant="icon" icon={iconLeft} onClick={handlePreviousWeek} />
       <DateDisplay>
         {weekStart?.format("DD.MM")} -{" "}
         {weekStart?.add(4, "days").format("DD.MM")}
@@ -81,7 +80,7 @@ const WeekSwitcher = (props) => {
       <ParityIndicator>
         Tydzień {weekStart?.week() % 2 ? "nieparzysty" : "parzysty"}
       </ParityIndicator>
-      <ArrowRight onClick={handleNextWeek} />
+      <ArrowRight variant="icon" icon={iconRight} onClick={handleNextWeek} />
     </Box>
   );
 };
