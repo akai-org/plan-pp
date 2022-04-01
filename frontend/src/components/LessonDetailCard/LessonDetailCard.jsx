@@ -19,7 +19,6 @@ const StyledCard = styled(Card)`
   justify-content: flex-start;
   text-align: center;
   border-radius: 12px;
-  min-height: 450px;
   min-width: 300px;
   max-width: 380px;
   box-shadow: ${() => theme.boxShadow.large}

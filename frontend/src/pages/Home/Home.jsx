@@ -9,13 +9,14 @@ import exampleLessons from "../../pages/Week/Timetable/exampleLessons";
 
 const Container = styled.div`
   width: 100%;
+  height: calc(100vh - 128px);
   max-width: 1200px;
-  margin: 50px auto 0;
+  margin: 32px auto 0;
   display: grid;
   grid-template-columns: 32% 36% 32%;
+  grid-template-rows: minmax(auto, 600px);
   gap: 28px;
-  justify-content: center;
-  padding: 50px;
+  place-content: center;
 
   @media screen and (max-width: 1024px) {
     display: flex;

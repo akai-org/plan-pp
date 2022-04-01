@@ -18,7 +18,6 @@ const StyledCard = styled(Card)`
   justify-content: space-between;
   text-align: center;
   border-radius: 12px;
-  min-height: 500px;
   min-width: 300px;
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.2);
   @media screen and (max-width: 1024px) {
