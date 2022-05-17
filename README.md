@@ -5,9 +5,8 @@
 - ReactJS >=17.0.2
 
 ## Backend
-- Python 3.9
-- Django >= 3.0 , < 4.0
-- Django rest framework ...
+- Node 14.18.1
+- Express 4.18.1
 
 ## Clone repository
 ### Docker
@@ -23,24 +22,14 @@ To run our app type:
 docker-compose up
 ```
 
-Sometimes you will need to make migrations in Django server.
-In order to do that, your Docker container must be enabled. After that type:
-```console
-docker exec -it backend-planpp python manage.py makemigrations
-docker exec -it backend-planpp python manage.py migrate
-```
+React application works on port 3000.
+
 ### BACKEND
+Backend application works on port 3001.
 
-To execute Django commands inside your container use comand:
-```console
-docker exec -it backend-planpp python manage.py <command>
-```
-For example: to create Django super user type:
-```console
-docker exec -it backend-planpp python manage.py createsuperuser
-```
+_WIP_
 
-
+---
 
 prowadzi @mima-design
 

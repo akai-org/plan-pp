@@ -1,8 +1,9 @@
-FROM python:3.9
-ENV PYTHONUNBUFFERED=1
-WORKDIR /app/backend
-COPY requirements.txt /app/backend
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
-COPY . /app/backend
-EXPOSE 8000
+FROM node:14.18.1-alpine
+COPY package.json /data/
+COPY package-lock.json /data/
+WORKDIR /data/
+RUN npm install
+ENV PATH /data/node_modules/.bin:$PATH
+COPY . /data/app/backend/
+WORKDIR /data/app/backend/
+EXPOSE 3001

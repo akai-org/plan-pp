@@ -1,6 +1,0 @@
-Django>=3.0,<4.0
-mysqlclient>=1.3.12
-djangorestframework
-python-dotenv
-markdown
-django-filter

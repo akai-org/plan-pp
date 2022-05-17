@@ -2,27 +2,29 @@ version: "3.8"
 
 services:
   db:
-    container_name: mysql-planpp
-    image: mysql:5.7
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: postgres-planpp
     restart: always
     ports:
-      - 3306:3306
+      - 5432:5432
     environment:
-       MYSQL_DATABASE: planpp
-       MYSQL_ROOT_USER: root
-       MYSQL_ROOT_PASSWORD: password
+        POSTGRES_DB: pgdb
+        POSTGRES_USER: pguser
+        POSTGRES_PASSWORD: pguser
     volumes:
-      - .dbdata:/var/lib/mysql
+      - ./database/.dbdata:/var/lib/postgresql/data
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     container_name: backend-planpp
-    command: python manage.py runserver 0.0.0.0:8000
+    command: npm start
     volumes:
       - ./backend/:/app/backend/
     ports:
-      - "8000:8000"
+      - 3001:3001
     depends_on:
       - db
   frontend:
@@ -37,8 +39,5 @@ services:
       - 3000:3000
     volumes:
       - ./frontend/:/app/frontend/
-      - node_modules:/app/frontend/node_modules
     restart: always
     stdin_open: true
-volumes:
-  node_modules:
