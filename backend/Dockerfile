@@ -1,9 +1,7 @@
 FROM node:14.18.1-alpine
-COPY package.json /data/
-COPY package-lock.json /data/
-WORKDIR /data/
-RUN npm install
-ENV PATH /data/node_modules/.bin:$PATH
-COPY . /data/app/backend/
-WORKDIR /data/app/backend/
-EXPOSE 3001
+WORKDIR /app
+COPY package.json ./
+COPY package-lock.json ./
+COPY ./ ./
+RUN npm i
+CMD ["npm", "start"]

@@ -5,39 +5,68 @@ services:
     build:
       context: ./database
       dockerfile: Dockerfile
+    cap_add:
+      - SYS_NICE
     container_name: postgres-planpp
+    env_file:
+      - .env
     restart: always
     ports:
       - 5432:5432
-    environment:
-        POSTGRES_DB: pgdb
-        POSTGRES_USER: pguser
-        POSTGRES_PASSWORD: pguser
     volumes:
       - ./database/.dbdata:/var/lib/postgresql/data
-  backend:
+
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - 3050:80
+
+  api:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    # command: npm start
     container_name: backend-planpp
-    command: npm start
-    volumes:
-      - ./backend/:/app/backend/
-    ports:
-      - 3001:3001
     depends_on:
       - db
-  frontend:
+    env_file:
+      - .env
+    # ports:
+    #   - 3050:80
+    volumes:
+      - /app/node_modules
+      - ./backend/:/app/
+
+  client:
     build:
       context: ./frontend/
       dockerfile: Dockerfile
     command : npm start
     container_name: frontend-planpp
     depends_on:
-      - backend
+      - api
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     ports:
       - 3000:3000
     volumes:
-      - ./frontend/:/app/frontend/
+      - /app/node_modules
+      - ./frontend/:/app/
     restart: always
     stdin_open: true
+
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    ports:
+      - 8000:8080
+    depends_on:
+      - db
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql_db
