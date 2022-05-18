@@ -31,14 +31,11 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    # command: npm start
     container_name: backend-planpp
     depends_on:
       - db
     env_file:
       - .env
-    # ports:
-    #   - 3050:80
     volumes:
       - /app/node_modules
       - ./backend/:/app/
